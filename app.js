@@ -23,6 +23,8 @@ app.use(session({
 }));
 
 const viewsRoutes = require('./src/routes/viewsRoutes'); // Điều hướng view
+const adminRoute = require("./src/routes/admin/index.route");
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -30,7 +32,8 @@ app.use(express.json());
 //Handlebars
 app.engine('hbs', exphbs.engine({
     extname: '.hbs',
-    defaultLayout: 'main' // Layout chính
+    defaultLayout: 'main', // Layout chính
+    partialsDir: path.join(__dirname, 'src', 'views', 'partials')
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'src', 'views'))
@@ -38,6 +41,9 @@ app.set('views', path.join(__dirname, 'src', 'views'))
 app.use(express.static(path.join(__dirname, 'src', 'public')));
 
 app.use('/', viewsRoutes);
+
+// route admin
+adminRoute(app);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
