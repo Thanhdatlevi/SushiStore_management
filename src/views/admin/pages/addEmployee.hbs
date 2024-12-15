@@ -1,0 +1,199 @@
+<style>
+    /* Tổng thể */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    select.form-control {
+        height: 40px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Các phần hiển thị lỗi */
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    /* Các thẻ container */
+    .form-group select,
+    .form-group input {
+        width: 100%;
+    }
+</style>
+
+
+<div class="flex">
+
+    {{> admin_partials/sidebar}}
+
+    <div class="container">
+        <h2>Thêm Nhân Viên</h2>
+
+        <!-- Form thêm nhân viên -->
+        <form action="/admin/employees/add" method="POST">
+            <div class="form-group">
+                <label for="maNV">Mã Nhân Viên:</label>
+                <input type="text" id="maNV" name="MaNV" required placeholder="Nhập mã nhân viên" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="hoTen">Họ Tên Nhân Viên:</label>
+                <input type="text" id="hoTen" name="HoTen" required placeholder="Nhập họ tên nhân viên"
+                    class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="soNha">Số Nhà:</label>
+                <input type="text" id="soNha" name="SoNha" required placeholder="Nhập số nhà" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="duong">Đường:</label>
+                <input type="text" id="duong" name="Duong" required placeholder="Nhập tên đường" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="quan">Quận:</label>
+                <input type="text" id="quan" name="Quan" required placeholder="Nhập quận" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="thanhPho">Thành Phố:</label>
+                <input type="text" id="thanhPho" name="ThanhPho" required placeholder="Nhập thành phố"
+                    class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="ngaySinh">Ngày Sinh:</label>
+                <input type="date" id="ngaySinh" name="NgaySinh" required class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="gioiTinh">Giới Tính:</label>
+                <select id="gioiTinh" name="Phai" required class="form-control">
+                    <option value="Nam">Nam</option>
+                    <option value="Nu">Nữ</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="boPhan">Bộ Phận:</label>
+                <select id="boPhan" name="BoPhan" required class="form-control">
+                    {{#each departments}}
+                    <option value="{{MaBoPhan}}">
+                        {{MaBoPhan}}
+                        {{TenBoPhan}}
+                    </option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="chiNhanh">Chi Nhánh:</label>
+                <select id="chiNhanh" name="ChiNhanh" required class="form-control">
+                    {{#each branches}}
+                    <option value="{{MaCN}}">
+                        {{TenCN}}
+                    </option>
+                    {{/each}}
+                </select>
+            </div>
+
+
+
+
+            {{!-- <!-- Bộ phận -->
+            <div class="form-group">
+                <label for="boPhan">Bộ Phận:</label>
+                <select id="boPhan" name="BoPhan" required class="form-control">
+                    {{#each departments}}
+                    <option value="{{departments.MaBoPhan}}">
+                        {{departments.TenBoPhan}}
+                    </option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <!-- Chi nhánh -->
+            <div class="form-group">
+                <label for="chiNhanh">Chi Nhánh:</label>
+                <select id="chiNhanh" name="ChiNhanh" required class="form-control">
+                    {{#each branches}}
+                    <option value="{{MaCN}}">
+                        {{TenCN}}
+                    </option>
+                    {{/each}}
+                </select>
+            </div> --}}
+
+            <button type="submit" class="btn btn-primary">Thêm Nhân Viên</button>
+        </form>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,340 @@
+<style>
+  /* CSS cho bảng */
+  .employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+
+  .employee-table th {
+    background-color: #f2f2f2;
+  }
+
+  .employee-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  /* CSS cho nút Edit và Delete */
+  .action-btn {
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .edit-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .delete-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .delete-btn:hover {
+    background-color: #e53935;
+  }
+
+  .add-employee-btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .add-employee-btn {
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .add-employee-btn:hover {
+    background-color: #006f8a;
+  }
+
+  /* CSS cho bảng khi không có dữ liệu */
+  .employee-table td {
+    text-align: center;
+  }
+
+  th {
+    background-color: #4CAF50;
+    text-align: center;
+  }
+
+  .employee-table th {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .add-employee-btn-container {
+    text-align: center;
+  }
+
+  .addEmployee {
+    margin: 15px auto;
+  }
+
+  .add-employee-btn-container {
+    display: flex;
+    /* Dùng flexbox để căn giữa các phần tử */
+    flex-direction: column;
+    /* Sắp xếp theo chiều dọc */
+    align-items: center;
+    /* Căn giữa theo chiều ngang */
+    justify-content: center;
+    /* Căn giữa theo chiều dọc */
+    margin-top: 20px;
+  }
+
+  .add-employee-btn {
+    padding: 12px 24px;
+    /* Điều chỉnh padding cho nút */
+    background-color: #008CBA;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    /* Thêm hiệu ứng chuyển màu */
+    display: inline-block;
+    /* Đảm bảo nút là inline block */
+  }
+
+  .add-employee-btn:hover {
+    background-color: #006f8a;
+    /* Thay đổi màu khi hover */
+  }
+
+  .add-employee-btn-container label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+</style>
+
+{{!-- Css cho Filter by Branch --}}
+
+<style>
+  .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Khoảng cách giữa các thành phần */
+    margin-bottom: 20px;
+    /* Khoảng cách phía dưới toàn bộ filter */
+  }
+
+  .form-group label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    /* Khoảng cách giữa label và dropdown */
+  }
+
+  .form-group select {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 200px;
+  }
+
+  .btn {
+    padding: 5px 15px;
+    background-color: #007bff;
+    /* Màu xanh của nút */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+    /* Màu khi hover */
+  }
+</style>
+
+<form action="/admin/employees" method="GET">
+  <div class="form-group">
+    <label for="MaChiNhanh">Filter by Branch:</label>
+    <select id="MaChiNhanh" name="MaChiNhanh" class="form-control">
+      <option value="">Select Branch</option>
+      {{#each branches}}
+      <option value="{{this.MaCN}}" {{#if (eq this.MaCN ../MaChiNhanh)}}selected{{/if}}>
+        {{this.TenCN}}
+      </option>
+      {{/each}}
+    </select>
+    <button type="submit" class="btn">Filter</button>
+  </div>
+</form>
+
+
+<!-- Admin Dashboard - index.hbs -->
+<div class="flex">
+  <!-- Sidebar -->
+  {{> admin_partials/sidebar}}
+
+
+  <table border="1" cellpadding="10" cellspacing="0" class="employee-table">
+    <thead>
+      <tr>
+        <th>Employee Code</th>
+        <th>Full Name</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th>Address</th>
+        <th>Department</th>
+        <th>Branch</th>
+        <th>Luong</th>
+        <th>Actions</th>
+        <th colspan="2">
+          <div class="add-employee-btn-container">
+            <label for="addEmployee">Add Employee:</label>
+            <a href="/admin/employees/add" class="add-employee-btn">Add</a>
+          </div>
+        </th>
+
+        <th>
+          <div class="header">
+            <form action="/admin/employees/search" method="GET">
+              <div class="form-group">
+                <label for="searchTerm">Search Employee:</label>
+                <input type="text" id="searchTerm" name="searchTerm" class="form-control"
+                  placeholder="Enter Code and Name Of Employee" value="{{searchTerm}}">
+              </div>
+              <button type="submit" class="btn">Tìm kiếm</button>
+            </form>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each employees}}
+      <tr>
+        <td>{{this.MaNV}}</td>
+        <td>{{this.HoTen}}</td>
+        <td>{{this.Phai}}</td>
+        <td class="date-cell">{{this.NgaySinh}}</td>
+        {{!-- <td>{{this.NgaySinh}}</td> --}}
+        <td>{{this.SoNha}}, {{this.Duong}}, {{this.Quan}}, {{this.ThanhPho}}</td>
+        <td>{{this.BoPhan}}</td>
+        <td>{{this.ChiNhanh}}</td>
+        <td>{{this.Luong}}</td>
+        <td>
+          <a href="/admin/employees/edit/{{this.MaNV}}" class="action-btn edit-btn">Edit</a>
+          <form action="/admin/employees/delete/{{this.MaNV}}" method="post" style="display:inline;">
+            <button type="submit" class="action-btn delete-btn">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{!-- <div class="add-employee-btn-container">
+    <a href="/admin/employees/add" class="add-employee-btn">Add New Employee</a>
+  </div> --}}
+
+</div>
+
+
+
+{{!--
+<!-- Hiển thị danh sách nhân viên -->
+<h3>Danh Sách Nhân Viên</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Mã NV</th>
+      <th>Họ Tên</th>
+      <th>Địa chỉ</th>
+      <th>Chi Nhánh</th>
+      <th>Bộ Phận</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each employees}}
+    <tr>
+      <td>{{MaNV}}</td>
+      <td>{{HoTen}}</td>
+      <td>{{SoNha}}, {{Duong}}, {{Quan}}, {{ThanhPho}}</td>
+      <td>{{ChiNhanh}}</td>
+      <td>{{BoPhan}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table> --}}
+
+<style>
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group input {
+    width: 150px;
+    margin-top: 15px;
+    padding: 8px;
+    /* Thêm padding cho input */
+    font-size: 14px;
+    /* Đảm bảo kích thước chữ hợp lý */
+    color: black;
+    /* Màu chữ đen để dễ đọc */
+    border: 1px solid #ccc;
+    /* Thêm border cho input */
+    border-radius: 4px;
+    /* Góc bo tròn cho input */
+  }
+
+  .form-group input::placeholder {
+    color: #999;
+    /* Màu placeholder xám nhạt */
+  }
+
+  .btn {
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    /* Góc bo tròn cho nút */
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const dateCells = document.querySelectorAll('.date-cell'); // Lấy tất cả các ô có class là 'date-cell'
+
+    dateCells.forEach(cell => {
+      const dateText = cell.textContent;
+      const date = new Date(dateText); // Chuyển chuỗi thành đối tượng Date
+      const formattedDate = date.toISOString().split('T')[0]; // Chỉ lấy phần ngày trong định dạng yyyy-MM-dd
+      cell.textContent = formattedDate; // Cập nhật nội dung của ô
+    });
+  });
+</script>

@@ -1,0 +1,133 @@
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+<div class="flex">
+{{!-- 
+    {{> admin_partials/sidebar}} --}}
+
+      <!-- Sidebar -->
+    <aside class="sidebar">
+        {{> admin_partials/sidebar}}
+    </aside>
+
+    <h1>Sửa Thông Tin Chi Nhánh</h1>
+        <form action="/admin/branches/edit/{{branch.MaCN}}" method="POST">
+            <!-- Ten Chi Nhánh -->
+            <div class="form-group">
+                <label for="TenCN">Tên Chi Nhánh</label>
+                <input type="text" id="TenCN" name="TenCN" value="{{branch.TenCN}}" required>
+            </div>
+
+            <!-- Dia Chi -->
+            <div class="form-group">
+                <label for="DiaChi">Địa Chỉ</label>
+                <input type="text" id="DiaChi" name="DiaChi" value="{{branch.DiaChi}}" required>
+            </div>
+
+            <!-- Giờ Mở -->
+            <div class="form-group">
+                <label for="GioMo">Giờ Mở</label>
+                <input type="time" id="GioMo" name="GioMo" value="{{branch.GioMo}}" required>
+            </div>
+
+            <!-- Giờ Đóng -->
+            <div class="form-group">
+                <label for="GioDong">Giờ Đóng</label>
+                <input type="time" id="GioDong" name="GioDong" value="{{branch.GioDong}}" required>
+            </div>
+
+            <!-- Số Điện Thoại -->
+            <div class="form-group">
+                <label for="SDT">Số Điện Thoại</label>
+                <input type="tel" id="SDT" name="SDT" value="{{branch.SDT}}" required>
+            </div>
+
+            <!-- Giao Hàng -->
+            <div class="form-group">
+                <label for="GiaoHang">Giao Hàng</label>
+                <input type="checkbox" id="GiaoHang" name="GiaoHang" {{#if branch.GiaoHang}}checked{{/if}}>
+            </div>
+
+            <!-- Xe Máy -->
+            <div class="form-group">
+                <label for="XeMay">Xe Máy</label>
+                <input type="checkbox" id="XeMay" name="XeMay" {{#if branch.XeMay}}checked{{/if}}>
+            </div>
+
+            <!-- Xe Hơi -->
+            <div class="form-group">
+                <label for="XeHoi">Xe Hơi</label>
+                <input type="checkbox" id="XeHoi" name="XeHoi" {{#if branch.XeHoi}}checked{{/if}}>
+            </div>
+
+            <!-- Mã Khu Vực -->
+            <div class="form-group">
+                <label for="MaKhuVuc">Mã Khu Vực</label>
+                <input type="number" id="MaKhuVuc" name="MaKhuVuc" value="{{branch.MaKhuVuc}}" required>
+            </div>
+
+            <!-- Mã Quản Lý -->
+            <div class="form-group">
+                <label for="NVQuanLy">Mã Quản Lý</label>
+                <input type="text" id="NVQuanLy" name="NVQuanLy" value="{{branch.NVQuanLy}}" required>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Cập Nhật</button>
+            </div>
+        </form>
+
+
+    
+
+</div>

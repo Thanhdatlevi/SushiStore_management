@@ -1,0 +1,311 @@
+{{!-- <style>
+    /* Reset các thuộc tính mặc định để form có thiết kế đẹp hơn */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Cài đặt phông chữ chung cho toàn bộ trang */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 10px;
+    }
+
+    /* Style cho form */
+    .branch-form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        /* Giảm chiều rộng tối đa của form */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Tiêu đề form */
+    .branch-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    /* Style cho từng group input */
+    .form-group {
+        margin-bottom: 15px;
+        /* Giảm khoảng cách giữa các input */
+    }
+
+    .form-group label {
+        font-size: 14px;
+        color: #555;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Style cho input */
+    .form-group input[type="text"],
+    .form-group input[type="time"] {
+        width: 100%;
+        padding: 12px;
+        /* Tăng padding để input có không gian thoáng */
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group input[type="time"]:focus {
+        border-color: #4CAF50;
+    }
+
+    /* Style cho các checkbox */
+    .form-group input[type="checkbox"] {
+        margin-right: 10px;
+    }
+
+    /* Nút submit */
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+        background-color: #45a049;
+    }
+
+    /* Responsive cho các thiết bị nhỏ */
+    @media (max-width: 768px) {
+        .branch-form {
+            padding: 20px;
+            width: 100%;
+        }
+
+        .branch-form h2 {
+            font-size: 20px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="time"] {
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            padding: 10px 15px;
+        }
+    }
+</style> --}}
+
+<style>
+    {{!-- body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        /* Đảm bảo trang sẽ chiếm hết chiều cao màn hình */
+        padding: 0;
+    } --}}
+
+    /* Style cho form */
+    .branch-form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        /* Đảm bảo form có kích thước tối đa hợp lý */
+        margin: 20px auto;
+        /* Căn giữa form */
+    }
+
+    /* Style cho tiêu đề form */
+    .branch-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="time"] {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group input[type="time"]:focus {
+        border-color: #4CAF50;
+        /* Hiệu ứng khi focus vào input */
+    }
+
+    .form-group input[type="checkbox"] {
+        margin-right: 10px;
+        /* Tạo khoảng cách giữa checkbox và label */
+    }
+
+    .form-group input[type="checkbox"]:hover {
+        cursor: pointer;
+        /* Thêm hiệu ứng khi hover */
+    }
+
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+        background-color: #45a049;
+        /* Thay đổi màu khi hover */
+    }
+
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+        background-color: #45a049;
+        /* Thay đổi màu khi hover */
+    }
+
+    /* Responsive cho các thiết bị nhỏ */
+    @media (max-width: 768px) {
+        .branch-form {
+            padding: 20px;
+            width: 100%;
+        }
+
+        .branch-form h2 {
+            font-size: 20px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="time"] {
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            padding: 10px 15px;
+        }
+    }
+
+    /* Style cho từng group input */
+    .form-group {
+        margin-bottom: 15px;
+        /* Giảm khoảng cách giữa các input */
+    }
+
+    .form-group label {
+        font-size: 14px;
+        color: #555;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .title{
+        font-weight: 600;
+    }
+</style> 
+
+<div class="flex">
+
+    {{> admin_partials/sidebar}}
+
+
+    <form action="/admin/branches/add" method="POST" class="branch-form">
+        <h2 class="title">Thêm Chi Nhánh</h2>
+
+        <div class="form-group">
+            <label for="tenChiNhanh">Tên Chi Nhánh</label>
+            <input type="text" id="tenChiNhanh" name="tenChiNhanh"  required>
+        </div>
+
+        <div class="form-group">
+            <label for="diaChi">Địa Chỉ</label>
+            <input type="text" id="diaChi" name="diaChi"  required>
+        </div>
+
+        <div class="form-group">
+            <label for="gioMo">Giờ Mở</label>
+            <input type="time" id="gioMo" name="gioMo"  required>
+        </div>
+
+        <div class="form-group">
+            <label for="gioDong">Giờ Đóng</label>
+            <input type="time" id="gioDong" name="gioDong"  required>
+        </div>
+
+        <div class="form-group">
+            <label for="sdt">Số Điện Thoại</label>
+            <input type="text" id="sdt" name="sdt"  required>
+        </div>
+
+        <div class="form-group">
+            <label for="giaoHang">Giao Hàng</label>
+            <input type="checkbox" id="giaoHang" name="giaoHang" {{#if GiaoHang}}checked{{/if}}>
+        </div>
+
+        <div class="form-group">
+            <label for="xeMay">Xe Máy</label>
+            <input type="checkbox" id="xeMay" name="xeMay" required >
+        </div>
+
+        <div class="form-group">
+            <label for="xeHoi">Xe Hơi</label>
+            <input type="checkbox" id="xeHoi" name="xeHoi" required >
+        </div>
+
+        <div class="form-group">
+            <label for="maKhuVuc">Mã Khu Vực</label>
+            <input type="text" id="maKhuVuc" name="maKhuVuc" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nvQuanLy">Mã Nhân Viên Quản Lý</label>
+            <input type="text" id="nvQuanLy" name="nvQuanLy" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Thêm Chi Nhánh</button>
+    </form>
+
+
+</div>
