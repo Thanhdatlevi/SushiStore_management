@@ -10,11 +10,17 @@ module.exports.statForm = async (req, res) => {
   } catch (err) {}
 };
 
-module.exports.dailyForm = async (req, res) => {
+module.exports.dailyStatForm = async (req, res) => {
   try {
+    const pool = await poolPromise;
+
+    result = await pool
+      .request()
+      .query("SELECT cn.MaCN, cn.TenCN FROM chi_nhanh cn");
     res.render("admin/pages/dailyStat", {
       layout: "admin_layouts/mainAdmin",
       title: "Employee Management",
+      chinhanh: result.recordset,
     });
   } catch (err) {}
 };
