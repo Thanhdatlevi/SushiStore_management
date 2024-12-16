@@ -9,3 +9,12 @@ module.exports.statForm = async (req, res) => {
     });
   } catch (err) {}
 };
+
+module.exports.dailyForm = async (req, res) => {
+  try {
+    res.render("admin/pages/dailyStat", {
+      layout: "admin_layouts/mainAdmin",
+      title: "Employee Management",
+    });
+  } catch (err) {}
+};

@@ -12,6 +12,31 @@
     display: inline-block;
     margin: 20px;
 }
+.headerText:first-child{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 3em;
+    font-weight: 300;
+    color: rgb(0,200,200);
+    text-shadow: -2px 2px rgba(0,0,0,0.1);
+}
+.StatButton {
+    display: inline-block;
+    background-color: rgb(0,255,200);
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 1.5em;
+    padding: 2%;
+    margin: 5%;
+    transition: background-color 0.5s;
+}
+.StatButton:hover{
+    background-color: rgb(0,200,150);
+}
+
+.buttonWrapper{
+    max-width: 100%;
+    flex-wrap: wrap;
+}
 </style>
 <div>
 
@@ -20,10 +45,41 @@
             {{> admin_partials/sidebar}}
         </div>
 
+        <div id="mainForm" class="flex flex-col w-full">
+            <div id="text wrapper" class="headerWrap w-full">
+                <div id="headerItself" class="headerText">
+                    <h1>Chọn loại thống kê doanh thu</h1>
+                </div>
+            </div>
+            
+            <div id="buttonWrapper" class="buttonWrapper flex flex-row justify-center align-middle">
+                <a href="./stat/daily" id="buttonDaily" class="StatButton">
+                    <div>
+                        Daily Statistics 
+                    </div> 
+                </a>
+                <a href="./stat/weekly" id="buttonDaily" class="StatButton">
+                    <div>
+                        Weekly Statistics 
+                    </div> 
+                </a>
+                <a href="./stat/quarterly" id="buttonDaily" class="StatButton">
+                    <div>
+                        Quarterly Statistics 
+                    </div> 
+                </a>
+                <a href="./stat/yearly" id="buttonDaily" class="StatButton">
+                    <div>
+                        Yearly Statistics 
+                    </div> 
+                </a>
+                <a href="./stat/food" id="buttonDaily" class="StatButton">
+                    <div>
+                        Food Statistics 
+                    </div> 
+                </a>
 
-        <div id="text wrapper" class="headerWrap w-full">
-            <div id="headerItself" class="headerText">
-                <h1 class="">Chọn loại thống kê doanh thu</h1>
+
             </div>
         </div>
 
