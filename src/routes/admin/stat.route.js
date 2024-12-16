@@ -16,4 +16,4 @@ route.get("/", statController.statForm);
 // route.get("/yearly", statController.yearlyStatForm);
 // route.post("/yearly", statController.yearlyStat);
 
-module.exports.route;
+module.exports = route;

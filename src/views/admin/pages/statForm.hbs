@@ -1,11 +1,35 @@
-<!DOCTYPE html>
-<html>
-    <body>
-        <h1>Chọn loại thống kê doanh thu</h1>
+<style>
+/* .statBox { */
+/*     display: flex; */
+/*     align-items: flex-start; */
+/*     flex-direction: row; */
+/* } */
+.headerWrap {
+    display: inline-block;
+    text-align: center;
+}
+.headerText {
+    display: inline-block;
+    margin: 20px;
+}
+</style>
+<div>
 
-        <div>
-            {{loaiThongKe}}
+    <div id="Stat form box" class="flex flex-row">
+        <div class="w-64">
+            {{> admin_partials/sidebar}}
         </div>
-    </body>
+
+
+        <div id="text wrapper" class="headerWrap w-full">
+            <div id="headerItself" class="headerText">
+                <h1 class="">Chọn loại thống kê doanh thu</h1>
+            </div>
+        </div>
+
+        <!-- <div> -->
+        <!--     {{loaiThongKe}} -->
+        <!-- </div> -->
+    </div>
     
-</html>
+</div>
