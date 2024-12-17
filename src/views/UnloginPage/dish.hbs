@@ -1,0 +1,96 @@
+<section class="my-16" id="listTour">
+    <div class="mb-8 mx-4 sm:mx-8 md:mx-16"  id="divide">
+        <div class="w-full ">
+            <h2 class="text-3xl sm:text-4xl md:text-6xl font-semibold mb-4">{{location_name}}</h2>
+            <p class="text-base sm:text-lg font-medium text-gray-600 mb-8">{{loc_detail}}</p>
+        </div>
+    </div>
+
+    <hr class="w-full border-gray-200 my-8 mx-auto">
+
+    <div class="flex flex-col sm:flex-row gap-4">
+        <div class="md:basis-2/6">
+
+
+            <form id="searchService" action="\tours" method="GET" class="mx-8 md:mx-16">
+                <fieldset id="location" class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-2 mt-4">
+                    <legend class="font-medium text-xl my-4">Chọn khu vực</legend>
+                    <div class="flex items-center gap-2 cursor-pointer">
+                        <input id="bac" type="radio" name="location" value="1"
+                            class="peer accent-emerald-900 cursor-pointer" />
+                        <label for="bac"
+                            class="flex items-center gap-2 peer-checked:text-emerald-900 whitespace-nowrap cursor-pointer">
+                            <span>Mien Bac</span>
+                        </label>
+                    </div>
+                    <div class="flex items-center gap-2 cursor-pointer">
+                        <input id="trung" type="radio" name="location" value="3"
+                            class="peer accent-emerald-900 cursor-pointer" />
+                        <label for="trung"
+                            class="flex items-center gap-2 peer-checked:text-emerald-900 whitespace-nowrap cursor-pointer">
+                            <span>Mien Trung</span>
+                        </label>
+                    </div>
+                    <div class="flex items-center gap-2 cursor-pointer">
+                        <input id="name" type="radio" name="location" value="2"
+                            class="peer accent-emerald-900 cursor-pointer" />
+                        <label for="name"
+                            class="flex items-center gap-2 peer-checked:text-emerald-900 whitespace-nowrap cursor-pointer">
+                            <span>Mien Nam</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <fieldset id="branch-selection" class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-2 mt-4">
+                    <legend class="font-medium text-xl my-4">Choose a branch</legend>
+                    <div class="mt-4">
+                        <select id="branch-select" name="branch" class="p-2 border border-gray-300 rounded-md text-gray-700">
+                            <option value="" selected disabled>Chọn chi nhánh</option>
+                            <option value="1">Branch 1 - 123 Main Street, City A</option>
+                            <option value="2">Branch 2 - 456 Elm Street, City B</option>
+                            <option value="3">Branch 3 - 789 Oak Street, City C</option>
+                            <option value="4">Branch 4 - 101 Pine Street, City D</option>
+                            <option value="5">Branch 5 - 202 Maple Street, City E</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <div class="price-range mt-6">
+                    <label for="price-range" class="font-medium text-xl block mb-4">Select Price Range</label>
+                    <div class="relative w-full h-10">
+                        <!-- Track -->
+                        <div class="absolute bg-gray-300 h-1 w-full rounded top-1/2 transform -translate-y-1/2"></div>
+                        <!-- Range Highlight -->
+                        <div id="slider-range" 
+                            class="absolute bg-emerald-600 h-1 rounded top-1/2 transform -translate-y-1/2"
+                            style="left: 20%; right: 20%;">
+                        </div>
+                        <!-- Min Price Slider -->
+                        <input type="range" id="min-price" 
+                            class="absolute w-1/2 h-1 bg-transparent appearance-none pointer-events-auto z-20"
+                            min="0" max="250000" value="0" step="10000">
+                        <!-- Max Price Slider -->
+                        <input type="range" id="max-price" 
+                            class="absolute left-1/2 w-1/2 h-1 bg-transparent appearance-none pointer-events-auto z-20"
+                            min="250000" max="500000" value="500000" step="10000">
+                    </div>
+                    <div class="flex justify-between mt-4">
+                        <span id="min-price-label" class="text-gray-700 text-sm">0 vnd</span>
+                        <span id="max-price-label" class="text-gray-700 text-sm">500000 vnd</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="basis-4/6">
+            <div id="showTours" class="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-6 mx-0 md:mx-8">
+                </div>
+            <div class="pagination flex col-start-1 max-h-10 mt-4 px-8 ">
+                <button id="prev-page" onclick="prevPage()">Previous</button>
+                <div id="pageNumbers"></div> <!-- Container for page number buttons -->
+                <button id="next-page" onclick="nextPage()">Next</button>
+            </div>
+        </div>
+    </div>
+
+</section>
