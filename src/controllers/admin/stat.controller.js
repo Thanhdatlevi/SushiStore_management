@@ -1,6 +1,8 @@
 const sql = require("mssql");
 const { sqlConfig, poolPromise } = require("../../config/database");
 
+const Handlebars = require("handlebars");
+
 module.exports.statForm = async (req, res) => {
   try {
     res.render("admin/pages/statForm", {
@@ -34,7 +36,7 @@ module.exports.dailyStat = async (req, res) => {
       .request()
       .query("SELECT cn.MaCN, cn.TenCN FROM chi_nhanh cn");
 
-    let { MaCN, Ngay1, Ngay2 } = req.query;
+    let { MaCN, Ngay1, Ngay2 } = req.body;
 
     doanhthuRes = await pool
       .request()
@@ -45,7 +47,19 @@ module.exports.dailyStat = async (req, res) => {
         "EXEC xem_doanh_thu_chi_nhanh @MaCN = @CN, @Ngay1 = @N1, @Ngay2 = @N2",
       );
 
-    console.log(doanhthuRes.recordset)
+    console.log(typeof doanhthuRes.recordset);
+    console.log(doanhthuRes.recordset[1].Ngay);
+
+    for (let i = 0; i < doanhthuRes.recordset.length; i++) {
+      let date = doanhthuRes.recordset[i].Ngay;
+      date = new Date(date);
+      doanhthuRes.recordset[i].Ngay =
+        date.getDate() +
+        "/" +
+        (date.getMonth() + 1) +
+        "/" +
+        date.getFullYear();
+    }
 
     res.render("admin/pages/dailyStat", {
       layout: "admin_layouts/mainAdmin",
