@@ -4,10 +4,9 @@ const router = express.Router();
 //Route connect Home Page
 router.get('/', async (req, res) => {
     try {
-        res.render('home', {
-            layout: 'main',
+        res.render('UnloginPage/home', {
+            layout: 'Unlogin/UnloginMain',
             title: 'Home Page',
-            scripts: '<script src="/js/home.js"></script>'
         });
     } catch (err) {
         res.status(500).json({ error: err.message });

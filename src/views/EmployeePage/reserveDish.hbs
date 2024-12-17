@@ -1,0 +1,47 @@
+<section id="reserveDish" class="p-8 bg-gray-50 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Reserve Dish</h1>
+        <div class="flex flex-col md:flex-row items-center gap-6 mt-4 md:mt-0">
+            <!-- CCCD Input -->
+            <div class="flex flex-col">
+                <label for="cccd" class="mb-2 text-lg font-medium text-gray-700">Căn Cước Công Dân:</label>
+                <input type="text" id="cccd" class="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập CCCD">
+                <span id="cccdError" class="text-red-500 text-sm hidden mt-1">Vui lòng nhập đúng 12 số CCCD</span>
+            </div>
+
+            <div class="flex flex-col">
+                <label for="Soban" class="mb-2 text-lg font-medium text-gray-700">Số bàn:</label>
+                <input type="text" id="Soban" class="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập Số bàn">
+            </div>
+        </div>
+    </div>
+
+    <!-- Dish Container -->
+    <div id="dish-container" class="space-y-6">
+        <!-- Dishes will be dynamically added here -->
+    </div>
+
+    <!-- Add Dish Button -->
+    <div class="mt-6 flex justify-end">
+        <button id="addDishButton" class="bg-green-500 text-white font-medium py-2 px-6 rounded-md shadow-md hover:bg-green-600 transition-transform transform hover:scale-105">
+            Add Dish
+        </button>
+    </div>
+
+    <!-- Divider -->
+    <hr class="my-8 border-gray-300">
+
+    <!-- Total Price -->
+    <div class="flex justify-between items-center text-lg font-semibold text-gray-700">
+        <span>Total:</span>
+        <span id="totalPrice" class="text-xl font-bold text-gray-900">0 VND</span>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-8 flex justify-center">
+        <button type="button" id="submitButton" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105 focus:ring-4 focus:ring-blue-300">
+            Submit
+        </button>
+    </div>
+</section>
