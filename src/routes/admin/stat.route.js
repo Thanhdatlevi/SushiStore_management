@@ -6,9 +6,9 @@ route.get("/", statController.statForm);
 
 route.get("/daily", statController.dailyStatForm)
 route.post("/daily", statController.dailyStat);
-//
-// route.get("/monthly", statController.monthlyStatForm);
-// route.post("/monthly", statController.monthlyStat);
+
+route.get("/monthly", statController.monthlyStatForm);
+route.post("/monthly", statController.monthlyStat);
 //
 // route.get("/quarterly", statController.quarterlyStatForm);
 // route.post("/quarterly", statController.quarterlyStat);
