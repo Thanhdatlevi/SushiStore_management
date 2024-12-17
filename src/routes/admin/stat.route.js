@@ -5,7 +5,7 @@ const statController = require("../../controllers/admin/stat.controller");
 route.get("/", statController.statForm);
 
 route.get("/daily", statController.dailyStatForm)
-//route.post("/daily", statController.dailyStat);
+route.post("/daily", statController.dailyStat);
 //
 // route.get("/monthly", statController.monthlyStatForm);
 // route.post("/monthly", statController.monthlyStat);
