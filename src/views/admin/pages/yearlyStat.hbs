@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <style>
 /* .statBox { */
 /*     display: flex; */
@@ -94,7 +92,7 @@ tr {
             <div id="text wrapper" class="headerWrap w-full">
                 <div id="headerItself" class="headerText">
                     <h1>
-                        Thống kê theo ngày
+                        Thống kê theo tháng 
                     </h1>
                 </div>
             </div>
@@ -119,7 +117,7 @@ tr {
                     <thead>
                         <tr class="bg-gray-200 text-gray-700">
                             <th class="border border-gray-300 p-2">Chi Nhanh</th>
-                            <th class="border border-gray-300 p-2">Ngay</th>
+                            <th class="border border-gray-300 p-2">Nam</th>
                             <th class="border border-gray-300 p-2">Doanh Thu</th>
                         </tr>
                     </thead>
@@ -127,7 +125,7 @@ tr {
                         {{#each doanhthu}}
                         <tr class="hover:bg-gray-100">
                             <td class="border border-gray-300 p-2 text-center">{{this.MaChiNhanh}}</td>
-                            <td class="border border-gray-300 p-2 text-center">{{this.Ngay}}</td>
+                            <td class="border border-gray-300 p-2 text-center">{{this.Nam}}</td>
                             <td class="border border-gray-300 p-2 text-center">{{this.DoanhThu}}</td>
                             <!-- <td class="border border-gray-300 p-2 text-center flex gap-2 justify-center"> -->
                         </tr>
