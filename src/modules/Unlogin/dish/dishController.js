@@ -2,14 +2,14 @@ const Dish = require('./dishModel');
 const dishController = {
     getAllFilterDish: async (req, res) => {
         try {
-            const { page, location = -1, branch = -1, minPrice = -1, maxPrice = -1 } = req.query;
-            const allDish = await Dish.getAllDish(page, location, branch, minPrice, maxPrice);
+            const { page,  branch = -1, minPrice = -1, maxPrice = -1 } = req.query;
+            const allDish = await Dish.getAllDish(page, branch, minPrice, maxPrice);
             let html = '';
-            if (allDish.paginatedTours.length === 0 || page > allDish.totalPages) {
+            if (allDish.paginatedDishs.length === 0 || page > allDish.totalPages) {
                 html = '<p>No tours available</p>';
             }
             else
-            allDish.paginatedTours.forEach(dish => {
+            allDish.paginatedDishs.forEach(dish => {
                 html += `
                 <a href="#!" class="w-80 md:w-96 lg:w-80 mx-auto">
                     <div
@@ -47,10 +47,10 @@ const dishController = {
         try {
             res.render('UnloginPage/dish', {
                 layout: 'Unlogin/UnloginMain',
-                location_name: 'Popular',
-                loc_detail: `Here is a list of our top tours that we have carefully selected to bring you the best experiences. From journeys to explore pristine nature to cultural excursions rich in local identity, each tour is designed to meet the diverse interests and needs of visitors. With a team of professional guides and dedicated services, we are committed to bringing you a memorable and inspiring journey. Let's explore the most wonderful destinations through our attractive tours!`,
+                location_name: 'List Dish',
+                loc_detail: `Here is a list of our top sushi dishes, carefully selected to bring you the most delicious and authentic flavors. From traditional sushi rolls to innovative creations, each dish is designed to satisfy the tastes of all sushi lovers. With the freshest ingredients and expert chefs, we are committed to delivering a memorable and mouthwatering dining experience. Let's dive into the world of sushi and explore the finest flavors that will leave you craving for more!`,
                 title: 'Dish Page',
-                scripts: '<script src="/js/Customer/dish.js"></script>'
+                scripts: '<script src="/js/Unlogin/dish.js"></script>'
             });
         } catch (err) {
             res.status(500).json({ error: err.message });

@@ -2,14 +2,14 @@ const Dish = require('./dishModel');
 const dishController = {
     getAllFilterDish: async (req, res) => {
         try {
-            const { page, location = -1, branch = -1, minPrice = -1, maxPrice = -1 } = req.query;
-            const allDish = await Dish.getAllDish(page, location, branch, minPrice, maxPrice);
+            const { page,  branch = -1, minPrice = -1, maxPrice = -1 } = req.query;
+            const allDish = await Dish.getAllDish(page, branch, minPrice, maxPrice);
             let html = '';
-            if (allDish.paginatedTours.length === 0 || page > allDish.totalPages) {
+            if (allDish.paginatedDishs.length === 0 || page > allDish.totalPages) {
                 html = '<p>No tours available</p>';
             }
             else
-            allDish.paginatedTours.forEach(dish => {
+            allDish.paginatedDishs.forEach(dish => {
                 html += `
                 <a href="#!" class="w-80 md:w-96 lg:w-80 mx-auto">
                     <div

@@ -21,8 +21,8 @@
 
         <ul class="flex space-x-8 justify-items-end ml-auto items-center">
             <li>
-                <a href="/login" class="button bg-user-icon flex items-center justify-center">
-                    <span class="sr-only">User</span>
+                <a href="/login" class="flex items-center justify-center text-gray-500"  id="logoutButton">
+                    <i class="fa-solid fa-user text-3xl"></i>
                 </a>
             </li>
         </ul>
@@ -30,4 +30,21 @@
     </nav>
 </header>
 
-<script src="/js/navbar.js"></script>
+<script>
+    // Select the logout button
+    const logoutButton = document.getElementById('logoutButton');
+
+    // Add click event listener to the logout button
+    logoutButton.addEventListener('click', (event) => {
+        // Prevent the default action (navigation)
+        event.preventDefault();
+        
+        sessionStorage.removeItem('userName');
+        
+        // Remove the userID from sessionStorage
+        sessionStorage.removeItem('userID');
+        
+        // Optionally, redirect to the login page or home page after removing userID
+        window.location.href = '/login'; // or change to '/' if you want to redirect to the home page
+    });
+</script>

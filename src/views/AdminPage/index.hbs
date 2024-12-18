@@ -1,0 +1,42 @@
+<!-- Admin Dashboard - index.hbs -->
+<div class="flex">
+    <!-- Sidebar -->
+ {{> AdminHeader}}
+    <!-- Main Content -->
+    <main class="flex-1 p-8 bg-gray-100">
+
+        <h1 class="text-3xl font-semibold text-gray-800">Welcome to Admin Dashboard</h1>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded shadow">
+                <h2 class="text-xl font-semibold">Manage Orders</h2>
+                <p class="text-gray-600 mt-2">View and manage all customer orders.</p>
+                <a href="/admin/orders" class="text-blue-500 hover:text-blue-700 mt-4 inline-block">Go to Orders</a>
+            </div>
+            <div class="bg-white p-6 rounded shadow">
+                <h2 class="text-xl font-semibold">Manage Menu</h2>
+                <p class="text-gray-600 mt-2">Add or update items on the menu.</p>
+                <a href="/admin/menu" class="text-blue-500 hover:text-blue-700 mt-4 inline-block">Go to Menu</a>
+            </div>
+            <div class="bg-white p-6 rounded shadow">
+                <h2 class="text-xl font-semibold">Manage Users</h2>
+                <p class="text-gray-600 mt-2">View and manage restaurant users.</p>
+                <a href="/admin/users" class="text-blue-500 hover:text-blue-700 mt-4 inline-block">Go to Users</a>
+            </div>
+            <div class="bg-white p-6 rounded shadow">
+                <h2 class="text-xl font-semibold">Manage Branches</h2>
+                <p class="text-gray-600 mt-2">View and manage all Branches.</p>
+                <a href="/admin/branches" class="text-blue-500 hover:text-blue-700 mt-4 inline-block">Go to Branches</a>
+            </div>
+            <div class="bg-white p-6 rounded shadow">
+                <h2 class="text-xl font-semibold">Manage Employee</h2>
+                <p class="text-gray-600 mt-2">View and manage all Employee.</p>
+                <a href="/admin/employees" class="text-blue-500 hover:text-blue-700 mt-4 inline-block">Go to Employee</a>
+            </div>
+            <div class="bg-white p-6 rounded shadow">
+                <h2 class="text-xl font-semibold">Reports</h2>
+                <p class="text-gray-600 mt-2">View Reports.</p>
+                <a href="/admin/stat" class="text-blue-500 hover:text-blue-700 mt-4 inline-block">Go to Reports</a>
+            </div>
+        </div>
+    </main>
+</div>

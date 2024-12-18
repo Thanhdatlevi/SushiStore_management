@@ -1,0 +1,177 @@
+<style>
+  h1 {
+    font-family: Arial, sans-serif;
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    font-size: 1.1em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="date"] {
+    font-family: Arial, sans-serif;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  input:focus,
+  select:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+
+  form br {
+    display: none;
+    /* Removes extra line breaks */
+  }
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  select {
+    width: 100%;
+    /* Chiều rộng 100% của phần tử cha */
+    padding: 12px 40px;
+    /* Tăng padding để phần tử rộng hơn */
+    font-size: 1.2em;
+    /* Tăng kích thước chữ để dễ nhìn */
+    border-radius: 5px;
+    /* Tạo viền bo tròn cho đẹp mắt */
+    border: 1px solid #ddd;
+    /* Tạo đường viền nhẹ */
+    box-sizing: border-box;
+    /* Đảm bảo padding và border không ảnh hưởng đến chiều rộng */
+  }
+
+  label {
+    font-size: 1.1em;
+    /* Tăng kích thước font cho label */
+    margin-bottom: 10px;
+    /* Thêm khoảng cách dưới label */
+  }
+</style>
+
+<!-- Admin Dashboard - index.hbs -->
+<div class="flex">
+  {{> AdminHeader}}
+  <div>
+    <h1>Edit Employee</h1>
+
+  <!-- Kiểm tra nếu có lỗi và hiển thị thông báo lỗi -->
+  {{#if errorMessage}}
+  <div class="error-message">{{errorMessage}}</div>
+  {{/if}}
+
+  <form action="/admin/employees/edit/{{employee.MaNV}}" method="post">
+    <label for="maNV">Employee Code:</label>
+    <input type="text" id="maNV" name="MaNV" value="{{employee.MaNV}}" readonly><br><br>
+
+    <label for="hoTen">Full Name:</label>
+    <input type="text" id="hoTen" name="HoTen" value="{{employee.HoTen}}" required><br><br>
+
+    <label for="soNha">House Number:</label>
+    <input type="text" id="soNha" name="SoNha" value="{{employee.SoNha}}" required><br><br>
+
+    <label for="duong">Street:</label>
+    <input type="text" id="duong" name="Duong" value="{{employee.Duong}}" required><br><br>
+
+    <label for="quan">District:</label>
+    <input type="text" id="quan" name="Quan" value="{{employee.Quan}}" required><br><br>
+
+    <label for="thanhPho">City:</label>
+    <input type="text" id="thanhPho" name="ThanhPho" value="{{employee.ThanhPho}}" required><br><br>
+
+    {{!--  <label for="ngaySinh">Date of Birth:</label>
+    <input type="date" id="ngaySinh" name="NgaySinh" value="{{employee.NgaySinh}}" required><br><br> --}}
+
+    <label for="phai">Gender:</label>
+    <select id="phai" name="Phai" required>
+      <option value="Nam" {{#eq employee.Phai "Nam" }}selected{{/eq}}>Male</option>
+      <option value="Nu" {{#eq employee.Phai "Nu" }}selected{{/eq}}>Female</option>
+    </select><br><br>
+
+    {{!-- Mức lương --}}
+    {{!-- <label for="luong">Salary:</label>
+    <input type="number" id="luong" name="MucLuong" value="{{employee.Luong}}" required><br><br> --}}
+
+  <label for="luong">Salary:</label>
+  <input type="number" id="luong" name="Luong" value="{{employee.Luong}}" required><br><br>
+
+
+    <!-- Bộ phận -->
+    <div class="form-group">
+      <label for="boPhan">Bộ Phận:</label>
+      <select id="boPhan" name="BoPhan" required class="form-control">
+        {{#each departments}}
+        <option value="{{MaBoPhan}}" {{#eq MaBoPhan ../employee.BoPhan}}selected{{/eq}}>
+          {{TenBoPhan}}
+        </option>
+        {{/each}}
+      </select>
+    </div>
+
+    <!-- Chi nhánh -->
+    <div class="form-group">
+      <label for="chiNhanh">Chi Nhánh:</label>
+      <select id="chiNhanh" name="ChiNhanh" required class="form-control">
+        {{#each branches}}
+        <option value="{{MaCN}}" {{#eq MaCN ../employee.ChiNhanh}}selected{{/eq}}>
+          {{TenCN}}
+        </option>
+        {{/each}}
+      </select>
+    </div>
+
+
+
+    <button type="submit">Save Changes</button>
+  </form>
+  </div>
+
+</div>

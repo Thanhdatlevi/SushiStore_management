@@ -1,4 +1,4 @@
-const {pool} = require('../../../config/db');
+const {poolPromise} = require('../../../config/db');
 
 const Dish = {
     getAllDish: async (userID, page, minPrice, maxPrice) => {
@@ -13,7 +13,7 @@ const Dish = {
 		and nv.MaNV='${userID}'
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 
@@ -35,7 +35,7 @@ const Dish = {
 		join nhan_vien nv on macn.MaCn = nv.ChiNhanh and nv.MaNV = '${EmployID}'
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 
@@ -57,7 +57,7 @@ const Dish = {
 							);
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 
@@ -76,7 +76,7 @@ const Dish = {
             MaMon = '${dishID}'
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			await pool.request().query(query);
 		} catch (err) {
 			throw new Error('Error delete mon an chi nhanh: ' + err.message);
@@ -93,7 +93,7 @@ const Dish = {
 			where nv.MaNV = '${EmployID}')
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			await pool.request().query(query);
 		} catch (err) {
 			throw new Error('Error delete mon an chi nhanh: ' + err.message);
@@ -109,7 +109,7 @@ const Dish = {
 			where nv.MaNV = '${EmployID}'), '${MaMon}', ${GiaoHang})
 		`;
 		try {
-            await pool.connect()
+			const pool = await poolPromise;
 			await pool.request().query(query);
 		} catch (err) {
 			throw new Error('Error delete mon an chi nhanh: ' + err.message);

@@ -1,0 +1,171 @@
+
+    <style>
+        /* style.css */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .branches-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        .branches-table th,
+        .branches-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .branches-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .services {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .services li {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        
+
+        .services .active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .services .inactive {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .title {
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .btn-edit,
+        .btn-delete,
+        .btn-add {
+            padding: 8px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #e53935;
+        }
+
+        .btn-add {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .btn-add:hover {
+            background-color: #1976D2;
+        }
+    </style>
+
+    <div class="flex">
+        {{> AdminHeader}}
+        <div class="container">
+            <h1 class="title">Danh Sách Chi Nhánh</h1>
+
+            <table class="branches-table">
+                <thead>
+                    <tr>
+                        <th>Mã Chi Nhánh</th>
+                        <th>Tên Chi Nhánh</th>
+                        <th>Địa Chỉ</th>
+                        <th>Giờ Mở</th>
+                        <th>Giờ Đóng</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Dịch Vụ</th>
+                        <th>Quản Lý</th>
+                        <th>Mã Khu Vực</th>
+                        <th>Chức Năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each branches}}
+                    <tr>
+                        <td>{{MaCN}}</td>
+                        <td>{{TenCN}}</td>
+                        <td>{{DiaChi}}</td>
+                        <td>{{formatTime GioMo}}</td>
+                        <td>{{formatTime GioDong}}</td>
+                        <td>{{SDT}}</td>
+                        <td>
+                            <ul class="services">
+                                <li class="{{#if GiaoHang}}active{{else}}inactive{{/if}}">Giao Hàng</li>
+                                <li class="{{#if XeMay}}active{{else}}inactive{{/if}}">Xe Máy</li>
+                                <li class="{{#if XeHoi}}active{{else}}inactive{{/if}}">Xe Hơi</li>
+                            </ul>
+                        </td>
+                        <td>{{NVQuanLy}}</td>
+                        <td>{{MaKhuVuc}}</td>
+                        {{!-- thêm --}}
+                        <td>
+                            {{!-- <a href="/admin/branches/edit/{{MaCN}}">Sửa</a> |
+                            <a href="/admin/branches/delete/{{MaCN}}">Xóa</a> --}}
+                            <form action="/admin/branches/edit/{{MaCN}}" method="get">
+                                <button type="submit" class="btn-edit">Sửa</button>
+                            </form>
+                            <form action="/admin/branches/delete/{{MaCN}}" method="post"
+                                onsubmit="return confirm('Bạn có chắc chắn muốn xóa chi nhánh này?');">
+                                <button type="submit" class="btn-delete">Xóa</button>
+                            </form>
+                        </td>
+                        {{!-- thêm --}}
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+            <form action="/admin/branches/add" method="get">
+                <button type="submit" class="btn-add">Thêm Chi Nhánh</button>
+            </form>
+
+        </div>
+
+    </div>

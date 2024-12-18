@@ -1,0 +1,19 @@
+<div class="flex">
+    {{> AdminHeader}}
+    <main class="flex-1 p-8 bg-gray-100">
+        <h1>{{title}}</h1>
+    <form action="/admin/menu/edit/{{dish.MaMon}}" method="post">
+        <label>Dish Code</label>
+        <input type="text" name="MaMon" value="{{dish.MaMon}}" readonly>
+        <label>Name</label>
+        <input type="text" name="TenMon" value="{{dish.TenMon}}" required>
+        <label>Price</label>
+        <input type="number" name="Gia" value="{{dish.Gia}}" required>
+        <label>Type</label>
+        <input type="text" name="Loai" value="{{dish.Loai}}" required>
+        <button type="submit">Save Changes</button>
+    </form>
+        
+    </main>
+
+</div>

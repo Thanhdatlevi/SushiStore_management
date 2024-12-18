@@ -34,12 +34,6 @@ function applyFilters() {
     // Khởi tạo object filters
     const filters = {};
 
-    // Lấy giá trị radio button cho "location"
-    const selectedLocation = document.querySelector('input[name="location"]:checked');
-    if (selectedLocation) {
-        filters["location"] = selectedLocation.value;
-    }
-
     // Lấy giá trị từ dropdown menu cho "branch"
     const branchSelect = document.getElementById("branch-select");
     if (branchSelect && branchSelect.value) {
@@ -128,21 +122,6 @@ function prevPage() {
     }
 }
 function initializeEventListeners() {
-    // Lắng nghe sự kiện click của radio buttons (location)
-    // Lắng nghe sự kiện thay đổi của radio buttons (location)
-    const locationRadios = document.querySelectorAll('input[name="location"]');
-    locationRadios.forEach(radio => {
-        radio.addEventListener("change", function () {
-            // Bỏ chọn tất cả radio trước khi chọn cái mới
-            locationRadios.forEach(r => {
-                if (r !== this) r.checked = false;
-            });
-
-            // Nếu radio này được chọn thì cập nhật lại bộ lọc
-            currentPage = 1;
-            applyFilters();
-        });
-    });
 
     // Lắng nghe sự kiện thay đổi của dropdown menu (branch)
     const branchSelect = document.getElementById("branch-select");

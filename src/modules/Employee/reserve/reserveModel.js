@@ -1,4 +1,4 @@
-const {pool} = require('../../../config/db');
+const {poolPromise} = require('../../../config/db');
 
 const Reserve = {
     getMaxMP: async () => {
@@ -9,7 +9,7 @@ const Reserve = {
             FROM phieu_dat;
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 
@@ -33,9 +33,8 @@ const Reserve = {
 			VALUES ('${MaxMPs}', '${element.MaMon}', ${element.SoLuong}, 0);
 		`).join('\n');
 		const query = sqlOrder + '\n' + sqlMMPD;
-        console.log(query)
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			await pool.request().query(query);
 		} catch (err) {
 			throw new Error('Error fetching tours by location: ' + err.message);
@@ -56,9 +55,8 @@ const Reserve = {
 			VALUES ('${MaxMPs}', '${element.MaMon}', ${element.SoLuong}, 1);
 		`).join('\n');
 		const query = sqlOrder + '\n' + sqlMMPD;
-        console.log(query)
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			await pool.request().query(query);
 		} catch (err) {
 			throw new Error('Error fetching tours by location: ' + err.message);
@@ -66,7 +64,7 @@ const Reserve = {
 	},
 
 	statisticsByBranch: async (employeeID) => {
-		await pool.connect()
+		const pool = await poolPromise;
 		const phieuDatQuery = `
             SELECT pd.LoaiPhieu, COUNT(*) AS SoLuongPhieu
             FROM phieu_dat pd
@@ -208,7 +206,7 @@ const Reserve = {
 		where pd.CCCD= '${userID}'
 		`;
 		try {
-			await pool.connect()
+			const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 
@@ -235,7 +233,7 @@ const Reserve = {
 		where pd.CCCD= '${userID}'
 		`;
 		try {
-			await pool.connect()
+			const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 

@@ -1,4 +1,4 @@
-const {pool} = require('../../../config/db');
+const {poolPromise} = require('../../../config/db');
 
 const Branch = {
     getAllBranch: async () => {
@@ -8,7 +8,7 @@ const Branch = {
 		from chi_nhanh
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 
@@ -25,7 +25,7 @@ const Branch = {
 		where cn.GiaoHang = 1
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 

@@ -1,4 +1,4 @@
-const {pool} = require('../../../config/db');
+const {poolPromise} = require('../../../config/db');
 
 const Reserve = {
     getMaxMP: async () => {
@@ -9,7 +9,7 @@ const Reserve = {
             FROM phieu_dat;
 		`;
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 
@@ -20,7 +20,7 @@ const Reserve = {
 	submitReserveDish: async ( branchId, orderDetails,MaxMPs,onlineTime,timer,userID) => {
 		const sqlOrder= `
 		INSERT INTO phieu_dat (MaPhieu, NgayDat, MaCN, NhanVienLap, CCCD, LoaiPhieu)
-        VALUES ('${MaxMPs}', getdate(), ${branchId}, 'NV001', (select kh.CCCD
+        VALUES ('${MaxMPs}', getdate(), ${branchId}, null, (select kh.CCCD
 																from khach_hang kh
 																join the t on t.MaThe = '${userID}' and t.CCCD=kh.CCCD), 3);
 
@@ -33,9 +33,9 @@ const Reserve = {
 			VALUES ('${MaxMPs}', '${element.MaMon}', ${element.SoLuong}, 0);
 		`).join('\n');
 		const query = sqlOrder + '\n' + sqlMMPD;
-        console.log(query)
+		console.log(query)
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			await pool.request().query(query);
 		} catch (err) {
 			throw new Error('Error fetching tours by location: ' + err.message);
@@ -45,7 +45,7 @@ const Reserve = {
 	submitReserveTable: async ( branchId,khuvucId, orderDetails,MaxMPs, userID,date,time,note,guestCount) => {
 		const sqlOrder= `
 		INSERT INTO phieu_dat (MaPhieu, NgayDat, MaCN, NhanVienLap, CCCD, LoaiPhieu)
-        VALUES ('${MaxMPs}', '${date}', ${branchId}, 'NV001', (select kh.CCCD
+        VALUES ('${MaxMPs}', '${date}', ${branchId}, null, (select kh.CCCD
 			from khach_hang kh
 			join the t on t.MaThe = '${userID}' and t.CCCD=kh.CCCD), 2);
 
@@ -58,9 +58,8 @@ const Reserve = {
 			VALUES ('${MaxMPs}', '${element.MaMon}', ${element.SoLuong}, 1);
 		`).join('\n');
 		const query = sqlOrder + '\n' + sqlMMPD;
-        console.log(query)
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			await pool.request().query(query);
 		} catch (err) {
 			throw new Error('Error fetching tours by location: ' + err.message);
@@ -86,9 +85,8 @@ const Reserve = {
 			from khach_hang kh
 			join the t on t.MaThe = '${userID}' and t.CCCD=kh.CCCD)
 		`;
-		console.log(query)
 		try {
-			await pool.connect()
+			const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 
@@ -117,7 +115,7 @@ const Reserve = {
 			join the t on t.MaThe = '${userID}' and t.CCCD=kh.CCCD)
 		`;
 		try {
-			await pool.connect()
+			const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 

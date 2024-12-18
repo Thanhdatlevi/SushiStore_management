@@ -32,7 +32,7 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
                     window.location.href = "/employee";
                     break;
                 case 3: // Admin
-                    window.location.href = "/#!";
+                    window.location.href = "/admin";
                     break;
                 default:
                     alert("Unknown role. Contact support.");

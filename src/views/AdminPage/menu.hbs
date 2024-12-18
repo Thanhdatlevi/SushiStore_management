@@ -1,0 +1,282 @@
+<style>
+    /* Tổng quan */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f6f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    main {
+        background-color: #f9fafc;
+        border-left: 1px solid #e0e0e0;
+    }
+
+    /* Tiêu đề trang */
+    .page-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        background-color: #0b5285;
+        border-radius: 5px;
+    }
+
+    /* Bộ lọc */
+    .filter-section {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-form {
+        display: flex;
+        align-items: center;
+    }
+
+    .filter-group {
+        margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .filter-select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        background-color: #f4f6f9;
+        transition: all 0.3s ease;
+    }
+
+    .filter-select:hover {
+        border-color: #1976d2;
+        background-color: #e3f2fd;
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: #1976d2;
+        background-color: #e8f5fe;
+    }
+
+    /* Bảng hiển thị món ăn */
+    .menu-section {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .menu-table th {
+        background-color: #1976d2;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .menu-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e0e0e0;
+        color: #333;
+    }
+
+    .menu-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .filter-section {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .filter-group {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+
+        .menu-table th,
+        .menu-table td {
+            font-size: 12px;
+        }
+    }
+
+    .btn-add-dish {
+        font-size: 16px;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background-color: #1976d2;
+    }
+
+    .btn-edit,
+    .btn-delete {
+        font-size: 14px;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #333;
+    }
+
+    .btn-edit:hover,
+    .btn-delete:hover {
+        transform: scale(1.05);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .filter-section label {
+        margin-bottom: 8px;
+    }
+
+    .filter-form {
+        gap: 8px;
+    }
+
+    .menu-table th,
+    .menu-table td {
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .menu-table th {
+        background-color: #1976d2;
+        font-weight: bold;
+    }
+
+    .menu-table th:last-child{
+        text-align: center;
+    }
+</style>
+
+<div class="flex">
+    {{> AdminHeader}}
+    <main class="flex-1 p-8 bg-gray-100">
+        <div class="menu-header flex justify-between items-center mb-6">
+            <h1 class="page-title text-2xl font-bold text-gray-800">
+                <a href="/admin/menu">{{title}}</a>
+                </h1>
+            <a href="/admin/menu/add"
+                class="btn-add-dish bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">
+                ➕ Add New Dish
+            </a>
+            {{!-- search mon an --}}
+            <div class="search-section bg-white p-4 rounded shadow mb-6">
+                <form action="/admin/menu/search" method="GET" class="search-form flex gap-4 items-center">
+                    <div>
+                        <label for="searchBy" class="search-label text-gray-700 font-semibold">Search By:</label>
+                        <select name="searchBy" id="searchBy" class="search-select p-2 border border-gray-300 rounded">
+                            <option value="maMon">Dish Code</option>
+                            <option value="tenMon">Dish Name</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="searchInput" class="search-label text-gray-700 font-semibold">Keyword:</label>
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Enter keyword..."
+                            class="search-input p-2 border border-gray-300 rounded">
+                    </div>
+                    <button type="submit"
+                        class="btn-search bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600">
+                        🔍 Search
+                    </button>
+                </form>
+            </div>
+
+            {{!-- end search --}}
+
+        </div>
+
+        <!-- Bộ lọc menu -->
+        <div class="filter-section grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 bg-white p-4 rounded shadow">
+            <form action="/admin/menu/filter" method="GET" class="filter-form flex flex-col">
+                <label for="regionId" class="filter-label text-gray-700 font-semibold">Select Region:</label>
+                <select name="regionId" id="regionId" class="filter-select p-2 border border-gray-300 rounded"
+                    onchange="this.form.submit()">
+                    <option value="" disabled {{#unless regionId}}selected{{/unless}}>-- Select Region --</option>
+                    {{#each regions}}
+                    <option value="{{this.MaKhuVuc}}" {{#eq ../regionId this.MaKhuVuc}}selected{{/eq}}>
+                        {{this.TenKhuVuc}}</option>
+                    {{/each}}
+                </select>
+            </form>
+
+            <form action="/admin/menu/filter" method="GET" class="filter-form flex flex-col">
+                <label for="branchId" class="filter-label text-gray-700 font-semibold">Select Branch:</label>
+                <select name="branchId" id="branchId" class="filter-select p-2 border border-gray-300 rounded"
+                    onchange="this.form.submit()">
+                    <option value="" disabled {{#unless branchId}}selected{{/unless}}>-- Select Branch --</option>
+                    {{#each branches}}
+                    <option value="{{this.MaCN}}" {{#eq ../branchId this.MaCN}}selected{{/eq}}>{{this.TenCN}}</option>
+                    {{/each}}
+                </select>
+            </form>
+        </div>
+
+        <!-- Hiển thị danh sách món ăn -->
+        <div class="menu-section bg-white p-4 rounded shadow">
+            <table class="menu-table w-full border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-700">
+                        <th class="border border-gray-300 p-2">Dish Code</th>
+                        <th class="border border-gray-300 p-2">Name</th>
+                        <th class="border border-gray-300 p-2">Price</th>
+                        <th class="border border-gray-300 p-2">Type</th>
+                        <th class="border border-gray-300 p-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dishes}}
+                    <tr class="hover:bg-gray-100">
+                        <td class="border border-gray-300 p-2 text-center">{{this.MaMon}}</td>
+                        <td class="border border-gray-300 p-2">{{this.TenMon}}</td>
+                        <td class="border border-gray-300 p-2 text-right">{{this.Gia}}</td>
+                        <td class="border border-gray-300 p-2">{{this.Loai}}</td>
+                        <td class="border border-gray-300 p-2 text-center flex gap-2 justify-center">
+                            <a href="/admin/menu/edit/{{this.MaMon}}"
+                                class="btn-edit bg-blue-500 text-white px-3 py-1 rounded shadow hover:bg-blue-600">
+                                ✏️ Edit
+                            </a>
+                            <form action="/admin/menu/delete/{{this.MaMon}}" method="POST" style="display:inline;">
+                                <button type="submit"
+                                    class="btn-delete bg-red-500 text-white px-3 py-1 rounded shadow hover:bg-red-600">
+                                    🗑️ Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{#unless dishes}}
+            <p class="text-center text-gray-500 mt-4">No dishes available.</p>
+            {{/unless}}
+        </div>
+    </main>
+</div>

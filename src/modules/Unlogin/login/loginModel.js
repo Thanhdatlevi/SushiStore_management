@@ -1,4 +1,4 @@
-const {pool} = require('../../../config/db');
+const {poolPromise} = require('../../../config/db');
 
 const Branch = {
     checkLogin: async (username, password) => {
@@ -10,7 +10,7 @@ const Branch = {
 		`;
         console.log(query)
 		try {
-            await pool.connect()
+            const pool = await poolPromise;
 			const result = await pool.request().query(query);
             const test = result.recordset
 			return test 

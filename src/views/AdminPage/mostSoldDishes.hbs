@@ -1,0 +1,186 @@
+<style>
+    h1.text-3xl {
+        color: #2c3e50;
+    }
+
+    button[type="submit"] {
+        background-color: #27ae60;
+        color: #ffffff;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #1e8449;
+    }
+
+    label {
+        color: #34495e;
+    }
+
+    select,
+    input[type="date"] {
+        background-color: #f8f9fa;
+        border: 1px solid #d1d5db;
+        color: #2c3e50;
+        padding: 8px;
+        border-radius: 5px;
+        transition: all 0.2s ease;
+    }
+
+    select:focus,
+    input[type="date"]:focus {
+        border-color: #27ae60;
+        outline: none;
+        box-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
+    }
+
+    thead {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    td,
+    th {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .text-gray-500 {
+        color: #95a5a6;
+    }
+
+    .container {
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+    }
+</style>
+
+<div class="flex">
+    <!-- Sidebar -->
+    {{> AdminHeader}}
+    <!-- container -->
+    <div class="container mx-auto p-6 bg-gray-100">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+
+            <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center">{{title}}</h1>
+
+            <!-- branch Filter -->
+            {{#eq filter 'branch'}}
+            <form method="GET" action="/admin/reports/food/most-branch"
+                class="flex flex-col md:flex-row gap-6 mb-6 items-center">
+                <div class="flex flex-col">
+                    <label for="branchId" class="font-medium text-gray-700 mb-1">Select Branch:</label>
+                    <select name="branchId" id="branchId"
+                        class="p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500">
+                        <option value="">-- All Branches --</option>
+                        {{#each branches}}
+                        <option value="{{this.MaCN}}" {{#ifCond ../selectedBranch this.MaCN}}selected{{/ifCond}}>
+                            {{this.TenCN}}
+                        </option>
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit"
+                    class="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 focus:outline-none">
+                    Filter
+                </button>
+            </form>
+            {{/eq}}
+
+            <!-- Region Filter -->
+            {{#eq filter 'region'}}
+            <form method="GET" action="/admin/reports/food/most-region"
+                class="flex flex-col md:flex-row gap-6 mb-6 items-center">
+                <div class="flex flex-col">
+                    <label for="regionId" class="font-medium text-gray-700 mb-1">Select Region:</label>
+                    <select name="regionId" id="regionId"
+                        class="p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500">
+                        <option value="">-- All Regions --</option>
+                        {{#each regions}}
+                        <option value="{{this.MaKhuVuc}}" {{#ifCond ../selectedRegion
+                            this.MaKhuVuc}}selected{{/ifCond}}>
+                            {{this.TenKhuVuc}}
+                        </option>
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit"
+                    class="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 focus:outline-none">
+                    Filter
+                </button>
+            </form>
+            {{/eq}}
+
+            <!-- Branch & Date Filter -->
+            {{#eq filter 'branch-date'}}
+            <form method="GET" action="/admin/reports/food/most-branch-date"
+                class="flex flex-col md:flex-row gap-6 mb-6 items-center bg-gray-100 p-4 rounded-lg shadow-md">
+                <div class="flex flex-col">
+                    <label for="branchId" class="font-medium text-gray-700 mb-1">Select Branch:</label>
+                    <select name="branchId" id="branchId"
+                        class="p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500">
+                        <option value="">-- All Branches --</option>
+                        {{#each branches}}
+                        <option value="{{this.MaCN}}" {{#ifCond ../selectedBranch this.MaCN}}selected{{/ifCond}}>
+                            {{this.TenCN}}
+                        </option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="flex flex-col">
+                    <label for="startDate" class="font-medium text-gray-700 mb-1">Start Date:</label>
+                    <input type="date" name="startDate" id="startDate" value="{{startDate}}" required
+                        class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                <div class="flex flex-col">
+                    <label for="endDate" class="font-medium text-gray-700 mb-1">End Date:</label>
+                    <input type="date" name="endDate" id="endDate" value="{{endDate}}" required
+                        class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                <button type="submit"
+                    class="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 focus:outline-none">
+                    Filter
+                </button>
+            </form>
+            {{/eq}}
+
+            <!-- Table Data -->
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full border-collapse border border-gray-200 shadow-sm">
+                    <thead class="bg-green-600 text-white">
+                        <tr>
+                            <th class="border border-gray-300 p-4 text-left">Dish Name</th>
+                            <th class="border border-gray-300 p-4 text-left">{{#eq filter
+                                'region'}}Region{{else}}Branch{{/eq}}</th>
+                            <th class="border border-gray-300 p-4 text-right">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each dishes}}
+                        <tr class="hover:bg-gray-100">
+                            <td class="border border-gray-300 p-4">{{this.TenMon}}</td>
+                            <td class="border border-gray-300 p-4">
+                                {{#eq ../filter 'region'}}{{this.TenKhuVuc}}{{else}}{{this.MaCN}}{{/eq}}
+                            </td>
+                            <td class="border border-gray-300 p-4 text-right">{{this.SoLuong}}</td>
+                        </tr>
+                        {{/each}}
+                        {{#unless dishes}}
+                        <tr>
+                            <td colspan="3" class="text-center p-6 text-gray-500">No data available.</td>
+                        </tr>
+                        {{/unless}}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
