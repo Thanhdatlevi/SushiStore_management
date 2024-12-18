@@ -1,0 +1,206 @@
+
+<style>
+  /* General Styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9fafc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #34495e;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    background-color: #f9fafb;
+    font-size: 14px;
+    color: #2c3e50;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  }
+
+  input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+  }
+
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #2980b9;
+  }
+
+  .form-group select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M2%200L0%202h4z%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+  }
+
+  .form-group:last-of-type {
+    margin-bottom: 20px;
+  }
+
+  /* Responsive Styling */
+  @media (max-width: 600px) {
+    form {
+      padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      font-size: 12px;
+    }
+
+    button[type="submit"] {
+      font-size: 14px;
+    }
+  }
+
+  .title {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px; 
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    margin-bottom: 20px; 
+    padding: 10px; 
+    background-color: #ecf0f1; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block; 
+    width: auto; 
+}
+
+</style>
+
+
+<div class="flex">
+  <!-- Sidebar -->
+  {{> admin_partials/sidebar}}
+
+  <main class="flex-1 p-8 bg-gray-100">
+
+    {{!-- <h1 class="title">ADD DISH</h1> --}}
+
+    <form action="/admin/menu/add" method="post" class="space-y-4">
+      <div class="form-group">
+        <label for="MaMon">Dish Code</label>
+        <input type="text" name="MaMon" id="MaMon" required>
+      </div>
+      <div class="form-group">
+        <label for="TenMon">Dish Name</label>
+        <input type="text" name="TenMon" id="TenMon" required>
+      </div>
+      <div class="form-group">
+        <label for="Gia">Price</label>
+        <input type="number" name="Gia" id="Gia" required>
+      </div>
+      <div class="form-group">
+        <label for="Loai">Type</label>
+        <input type="text" name="Loai" id="Loai" required>
+      </div>
+      <div class="form-group">
+        <label for="MaKhuVuc">Region</label>
+        <select name="MaKhuVuc" id="MaKhuVuc" required onchange="fetchBranches(this.value)">
+          <option value="">-- Select Region --</option>
+          {{#each regions}}
+          <option value="{{this.MaKhuVuc}}">{{this.TenKhuVuc}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="MaCN">Branch</label>
+        <select name="MaCN" id="MaCN" required>
+          <option value="">-- Select Branch --</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="GiaoHang">Delivery Available</label>
+        <input type="checkbox" name="GiaoHang" id="GiaoHang" value="1">
+      </div>
+      <button type="submit">Add Dish</button>
+    </form>
+
+
+  </main>
+
+  <script>
+    // Fetch branches based on selected region
+    async function fetchBranches(regionId) {
+      const branchSelect = document.getElementById("MaCN");
+
+      // Clear current options
+      branchSelect.innerHTML = '<option value="">-- Select Branch --</option>';
+
+      if (regionId) {
+        try {
+          const response = await fetch(`/admin/menu/branches?MaKhuVuc=${regionId}`);
+          const branches = await response.json();
+
+          branches.forEach(branch => {
+            const option = document.createElement("option");
+            option.value = branch.MaCN;
+            option.textContent = branch.TenCN;
+            branchSelect.appendChild(option);
+          });
+        } catch (error) {
+          console.error("Error fetching branches:", error);
+        }
+      }
+    }
+  </script>

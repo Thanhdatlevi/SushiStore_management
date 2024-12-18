@@ -1,3 +1,143 @@
+/* styles.css */
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.header-container {
+    position: relative;
+}
+
+.header-bg {
+    background-image: url('../img/Slider.jpg');
+    width: 100%;
+    height: calc(100vw / 2);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.logo_container a {
+    color: white;
+    /* Để đảm bảo màu chữ là trắng */
+    text-decoration: none;
+    /* Bỏ gạch chân */
+    font-weight: 600;
+    /* Độ dày chữ */
+}
+
+#navbar {
+    background-color: rgba(18, 11, 11, 0.51);
+}
+
+#navbar .button {
+    background-size: cover;
+    /* Đảm bảo hình ảnh lấp đầy nút */
+    background-position: center;
+    /* Đặt hình ảnh ở giữa */
+    width: 36px;
+    /* Tương ứng với w-3 */
+    height: 36px;
+}
+
+
+
+#navbar .bg-user-icon {
+    background-image: url('../img/user-icon.png');
+    /* Đường dẫn đến hình ảnh người dùng */
+}
+
+#navbar .bg-user-icon:hover {
+    background-image: url('../img/user-icon-hover.png');
+}
+
+#navbar .search__container {
+    position: relative;
+    /* Để đảm bảo nút tìm kiếm được đặt tương đối với container */
+}
+
+#navbar .search__input {
+    width: 100%;
+    padding: 12px 24px;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 18px;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    background-position: 95% center;
+    border-radius: 50px;
+    border: 1px solid white;
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+#navbar .search__input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+#navbar .search__input:hover,
+#navbar .search__input:focus {
+    padding: 12px 0;
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid white;
+    border-radius: 0;
+    background-position: 100% center;
+}
+
+.search__container {
+    display: flex;
+    align-items: center;
+}
+
+#navbar .search__button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/SearchButton.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi khi hover */
+}
+
+#navbar .search__button:hover {
+    transform: translateY(-50%) scale(1.2);
+    /* Thu nhỏ nút khi hover */
+}
+
+#background-search {
+    background-image: url('../img/Search_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.why_choose {
+    background-image: url('../img/Home/why_choose_bg.jpg');
+    /* Đường dẫn đến ảnh của bạn */
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    /* Tùy chỉnh kích thước ảnh để lấp đầy khu vực */
+    background-position: center;
+    /* Đặt ảnh ở giữa */
+    background-repeat: no-repeat;
+    /* Không lặp lại ảnh */
+}
+
 .pagination {
     display: flex;
 }
@@ -27,4 +167,69 @@
 .pagination .disable {
     background-color: #333;
     /* Change this color as needed */
+}
+
+.homePage #bestdeal-container .title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.homePage #bestdeal-container .desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+@layer utilities {
+
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+}
+
+@media (max-width: 768px) {
+    #navbar .logo-container {
+        display: none;
+    }
+
+    #navbar .nav-list {
+        display: none;
+        /* Ẩn nav-list */
+        position: absolute;
+        top: 0;
+        left: -100%;
+        /* Ẩn sang bên trái */
+        height: 100vh;
+        width: 70%;
+        /* Chiếm 70% chiều rộng */
+        background-color: rgba(18, 11, 11, 0.7);
+        padding: 2rem 1rem;
+        /* Thêm khoảng cách bên trong nav-list */
+        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        /* Hiển thị các phần tử theo cột */
+        gap: 1.5rem;
+        /* Tạo khoảng cách đều giữa các phần tử */
+    }
+
+    #navbar .nav-list.show {
+        display: flex;
+        padding-top: 60px;
+        left: 0;
+        /* Hiện nav-list từ bên trái */
+    }
+
 }

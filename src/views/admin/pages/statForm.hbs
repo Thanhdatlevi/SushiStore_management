@@ -1,0 +1,178 @@
+<style>
+    /* .statBox { */
+    /*     display: flex; */
+    /*     align-items: flex-start; */
+    /*     flex-direction: row; */
+    /* } */
+    .headerWrap {
+        display: inline-block;
+        text-align: center;
+    }
+
+    .headerText {
+        display: inline-block;
+        margin: 20px;
+    }
+
+    .headerText:first-child {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 3em;
+        font-weight: 300;
+        color: rgb(0, 200, 200);
+        text-shadow: -2px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .StatButton {
+        display: inline-block;
+        background-color: rgb(0, 255, 200);
+        border-radius: 1rem;
+        text-align: center;
+        font-size: 1.5em;
+        padding: 2%;
+        margin: 5%;
+        transition: background-color 0.5s;
+    }
+
+    .StatButton:hover {
+        background-color: rgb(0, 200, 150);
+    }
+
+    .buttonWrapper {
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+</style>
+{{!-- <div>
+
+    <div id="Stat form box" class="flex flex-row">
+        <div class="w-64">
+            {{> admin_partials/sidebar}}
+        </div>
+
+        <div id="mainForm" class="flex flex-col w-full">
+            <div id="text wrapper" class="headerWrap w-full">
+                <div id="headerItself" class="headerText">
+                    <h1>Chọn loại thống kê doanh thu</h1>
+                </div>
+            </div>
+
+            <div id="buttonWrapper" class="buttonWrapper flex flex-row justify-center align-middle">
+                <a href="/admin/reports/daily" id="buttonDaily" class="StatButton">
+                    <div>
+                        Daily Statistics
+                    </div>
+                </a>
+                <a href="/admin/reports/monthly" id="buttonDaily" class="StatButton">
+                    <div>
+                        Monthly Statistics
+                    </div>
+                </a>
+                <a href="/admin/reports/quarterly" id="buttonDaily" class="StatButton">
+                    <div>
+                        Quarterly Statistics
+                    </div>
+                </a>
+                <a href="/admin/reports/yearly" id="buttonDaily" class="StatButton">
+                    <div>
+                        Yearly Statistics
+                    </div>
+                </a>
+                <a href="/admin/reports/food" id="buttonDaily" class="StatButton">
+                    <div>
+                        Food Statistics
+                    </div>
+                </a>
+
+
+            </div>
+        </div>
+
+        <!-- <div> -->
+        <!--     {{loaiThongKe}} -->
+        <!-- </div> -->
+    </div>
+
+</div> --}}
+
+<div class="flex min-h-screen bg-gray-100">
+    <!-- Sidebar -->
+    <div class="w-64 bg-white shadow-md">
+        {{> admin_partials/sidebar}}
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 text-center">Chọn loại thống kê</h1>
+            <p class="text-center text-gray-600 mt-2">Chọn một trong các loại thống kê để xem chi tiết</p>
+        </div>
+
+        <!-- Revenue Statistics Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4">📈 Thống kê doanh thu</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="/admin/reports/daily" class="StatButton bg-blue-500 text-white hover:bg-blue-600">
+                    <div class="text-center py-4">📅 Daily Statistics</div>
+                </a>
+                <a href="/admin/reports/monthly" class="StatButton bg-green-500 text-white hover:bg-green-600">
+                    <div class="text-center py-4">📆 Monthly Statistics</div>
+                </a>
+                <a href="/admin/reports/quarterly" class="StatButton bg-purple-500 text-white hover:bg-purple-600">
+                    <div class="text-center py-4">📊 Quarterly Statistics</div>
+                </a>
+                <a href="/admin/reports/yearly" class="StatButton bg-red-500 text-white hover:bg-red-600">
+                    <div class="text-center py-4">📈 Yearly Statistics</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Food Statistics Section -->
+        <div>
+            <h2 class="text-2xl font-bold text-gray-700 mb-4">🍔 Thống kê món ăn</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {{!-- <a href="/admin/reports/food" class="StatButton bg-orange-500 text-white hover:bg-orange-600">
+                    <div class="text-center py-4">🍽️ Food Statistics</div>
+                </a> --}}
+                <a href="/admin/reports/food/slowest-branch" class="StatButton bg-yellow-500 text-white hover:bg-yellow-600">
+                    <div class="text-center py-4">🐢 Slowest Branch</div>
+                </a>
+                <a href="/admin/reports/food/slowest-region" class="StatButton bg-teal-500 text-white hover:bg-teal-600">
+                    <div class="text-center py-4">📍 Slowest Region</div>
+                </a>
+                <a href="/admin/reports/food/slowest-branch-date" class="StatButton bg-indigo-500 text-white hover:bg-indigo-600">
+                    <div class="text-center py-4">📅 Slowest Branch by Date</div>
+                </a>
+                <a href="/admin/reports/food/most-branch" class="StatButton bg-yellow-500 text-white hover:bg-yellow-600">
+                    <div class="text-center py-4">🐢 Most Branch</div>
+                </a>
+                <a href="/admin/reports/food/most-region" class="StatButton bg-teal-500 text-white hover:bg-teal-600">
+                    <div class="text-center py-4">📍 Most Region</div>
+                </a>
+                <a href="/admin/reports/food/most-branch-date" class="StatButton bg-indigo-500 text-white hover:bg-indigo-600">
+                    <div class="text-center py-4">📅 Most Branch by Date</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CSS Styling -->
+<style>
+    .StatButton {
+        display: block;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .StatButton:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        border-left: 4px solid #1976d2;
+        padding-left: 10px;
+    }
+</style>

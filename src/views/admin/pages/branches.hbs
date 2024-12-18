@@ -1,0 +1,274 @@
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Buttons */
+.btn-add-user {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-add-user:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.text-blue-500,
+.text-red-500 {
+    transition: all 0.3s ease;
+}
+
+.text-blue-500:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.text-red-500:hover {
+    color: #d90429;
+    text-decoration: underline;
+}
+
+/* Table */
+.table-auto {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+}
+
+.table-auto thead th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.table-auto tbody td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    color: #555;
+}
+
+.table-auto tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-auto tbody tr:hover {
+    background-color: #e6f7ff;
+    cursor: pointer;
+}
+
+.table-auto tbody td:last-child {
+    text-align: center;
+}
+
+/* Forms and Filters */
+.filter-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.filter-select,
+input[type="text"],
+input[type="number"],
+input[type="time"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    transition: border 0.3s ease;
+}
+
+.filter-select:focus,
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Actions */
+.actions a {
+    margin-right: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.actions button {
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .table-auto thead {
+        display: none;
+    }
+
+    .table-auto tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-auto td {
+        display: block;
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+        font-size: 12px;
+    }
+
+    .table-auto td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .btn-add-user {
+        font-size: 14px;
+        padding: 8px 10px;
+        background-color: #0056b3;
+    }
+
+    
+}
+
+    .btn-branch{
+        background-color: #0b5285;
+        padding: 15px;
+    }
+
+</style>
+
+
+
+<div class="flex">
+    {{> admin_partials/sidebar}}
+
+    <main class="flex-1 p-8 bg-gray-100">
+
+        <div class="users-header flex justify-between items-center mb-6">
+            <h1 class=" btn-branch btn-add-user page-title text-2xl font-bold text-gray-800">
+                <a href="/admin/branches">{{title}}</a>
+            </h1>
+            {{!-- <a href="/admin/branches/add"
+                class="btn-add-user bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
+                ➕ Add New Branch
+            </a> --}}
+        </div>
+
+        {{!-- Search Section --}}
+        {{!-- <div class="search-section bg-white p-4 rounded shadow mb-6">
+            <form action="/admin/users/search" method="GET" class="search-form flex gap-4 items-center">
+                <div>
+                    <label for="searchBy" class="search-label text-gray-700 font-semibold">Search By:</label>
+                    <select name="searchBy" id="searchBy" class="search-select p-2 border border-gray-300 rounded">
+                        <option value="CCCD">CCCD</option>
+                        <option value="HoTen">Full Name</option>
+                        <option value="LoaiThe">Card Type</option>
+                        <option value="MaThe">Card Code</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="searchInput" class="search-label text-gray-700 font-semibold">Keyword:</label>
+                    <input type="text" id="searchInput" name="searchInput" placeholder="Enter keyword..."
+                        class="search-input p-2 border border-gray-300 rounded">
+                </div>
+                <button type="submit"
+                    class="btn-search bg-blue-500 text-black px-4 py-2 rounded shadow hover:bg-blue-600">
+                    🔍 Search
+                </button>
+            </form>
+
+        </div> --}}
+
+
+
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center">{{title}}</h1>
+
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full border-collapse border border-gray-200 shadow-sm">
+                    <thead class="bg-blue-600 text-black">
+                        <tr>
+                            <th class="p-4 border">Branch ID</th>
+                            <th class="p-4 border">Name</th>
+                            <th class="p-4 border">Address</th>
+                            <th class="p-4 border">Open Time</th>
+                            <th class="p-4 border">Close Time</th>
+                            <th class="p-4 border">Phone</th>
+                            <th class="p-4 border">Delivery</th>
+                            <th class="p-4 border">Motorbike</th>
+                            <th class="p-4 border">Car</th>
+                            <th class="p-4 border">Manager ID</th>
+                            <th class="p-4 border">Region ID</th>
+                            <th class="p-4 border text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each branches}}
+                        <tr class="hover:bg-gray-100">
+                            <td class="p-4 border">{{this.MaCN}}</td>
+                            <td class="p-4 border">{{this.TenCN}}</td>
+                            <td class="p-4 border">{{this.DiaChi}}</td>
+                            <td class="p-4 border">{{formatTime this.GioMo}}</td>
+                            <td class="p-4 border">{{formatTime this.GioDong}}</td>
+                            <td class="p-4 border">{{this.SDT}}</td>
+                            <td class="p-4 border">{{#if this.GiaoHang}}Yes{{else}}No{{/if}}</td>
+                            <td class="p-4 border">{{#if this.XeMay}}Yes{{else}}No{{/if}}</td>
+                            <td class="p-4 border">{{#if this.XeHoi}}Yes{{else}}No{{/if}}</td>
+                            <td class="p-4 border">{{this.NVQuanLy}}</td>
+                            <td class="p-4 border">{{this.MaKhuVuc}}</td>
+                            <td class="p-4 border text-center">
+                                {{!-- <a href="/admin/branches/edit/{{this.MaCN}}" class="text-blue-500 hover:underline">✏️
+                                    Edit</a> --}}
+                                <form action="/admin/branches/delete/{{this.MaCN}}" method="POST" class="inline-block">
+                                    <button type="submit" class="text-red-500 hover:underline">🗑️ Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        {{#unless branches}}
+                        <tr>
+                            <td colspan="12" class="text-center p-6 text-gray-500">No branches available.</td>
+                        </tr>
+                        {{/unless}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>

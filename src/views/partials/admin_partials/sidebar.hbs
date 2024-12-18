@@ -1,0 +1,65 @@
+<!-- Sidebar (sidebar.hbs) -->
+<aside class="w-64 h-screen bg-gray-800 text-white">
+    <div class="flex items-center justify-center p-6 bg-gray-900">
+        <img src="/img/logo.png" alt="Logo" class="w-32 h-auto">
+    </div>
+    
+    <nav class="mt-8">
+        <ul>
+            <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/admin/dashboard" class="flex items-center">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </a>
+            </li>
+            {{!-- <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/admin/orders" class="flex items-center">
+                    <i class="fas fa-box-open mr-3"></i>
+                    Manage Orders
+                </a>
+            </li> --}}
+            <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/admin/menu" class="flex items-center">
+                    <i class="fas fa-utensils mr-3"></i>
+                    Manage Menu
+                </a>
+            </li>
+            <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/admin/users" class="flex items-center">
+                    <i class="fas fa-users mr-3"></i>
+                    Manage Users
+                </a>
+            </li>
+            <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/admin/branches" class="flex items-center">
+                    <i class="fa-solid fa-code-branch mr-3"></i>
+                    Manage Branches
+                </a>
+            </li>
+            <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/admin/employees" class="flex items-center">
+                    <i class="fa-solid fa-code-branch mr-3"></i>
+                    Manage Employees
+                </a>
+            </li>
+            <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/admin/reports" class="flex items-center">
+                    <i class="fas fa-chart-line mr-3"></i>
+                    Reports
+                </a>
+            </li>
+            <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/admin/settings" class="flex items-center">
+                    <i class="fas fa-cogs mr-3"></i>
+                    Settings
+                </a>
+            </li>
+            <li class="px-6 py-2 hover:bg-gray-700 rounded">
+                <a href="/logout" class="flex items-center">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Log Out
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>

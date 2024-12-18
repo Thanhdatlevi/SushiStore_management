@@ -1,0 +1,190 @@
+{{!--
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+        font-weight: bold;
+    }
+
+    form input,
+    form select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    form button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    form button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="flex">
+    <aside class="sidebar">
+        {{> admin_partials/sidebar}}
+    </aside>
+
+    <h1>Sửa Thông Tin Chi Nhánh</h1>
+    <form action="/admin/branches/edit/{{branch.MaCN}}" method="POST">
+        <!-- Ten Chi Nhánh -->
+        <div class="form-group">
+            <label for="TenCN">Tên Chi Nhánh</label>
+            <input type="text" id="TenCN" name="TenCN" value="{{branch.TenCN}}" required>
+        </div>
+
+        <!-- Dia Chi -->
+        <div class="form-group">
+            <label for="DiaChi">Địa Chỉ</label>
+            <input type="text" id="DiaChi" name="DiaChi" value="{{branch.DiaChi}}" required>
+        </div>
+
+        <!-- Giờ Mở -->
+        <div class="form-group">
+            <label for="GioMo">Giờ Mở</label>
+            <input type="time" id="GioMo" name="GioMo" value="{{branch.GioMo}}" required>
+        </div>
+
+        <!-- Giờ Đóng -->
+        <div class="form-group">
+            <label for="GioDong">Giờ Đóng</label>
+            <input type="time" id="GioDong" name="GioDong" value="{{branch.GioDong}}" required>
+        </div>
+
+        <!-- Số Điện Thoại -->
+        <div class="form-group">
+            <label for="SDT">Số Điện Thoại</label>
+            <input type="tel" id="SDT" name="SDT" value="{{branch.SDT}}" required>
+        </div>
+
+        <!-- Giao Hàng -->
+        <div class="form-group">
+            <label for="GiaoHang">Giao Hàng</label>
+            <input type="checkbox" id="GiaoHang" name="GiaoHang" {{#if branch.GiaoHang}}checked{{/if}}>
+        </div>
+
+        <!-- Xe Máy -->
+        <div class="form-group">
+            <label for="XeMay">Xe Máy</label>
+            <input type="checkbox" id="XeMay" name="XeMay" {{#if branch.XeMay}}checked{{/if}}>
+        </div>
+
+        <!-- Xe Hơi -->
+        <div class="form-group">
+            <label for="XeHoi">Xe Hơi</label>
+            <input type="checkbox" id="XeHoi" name="XeHoi" {{#if branch.XeHoi}}checked{{/if}}>
+        </div>
+
+        <!-- Mã Khu Vực -->
+        <div class="form-group">
+            <label for="MaKhuVuc">Mã Khu Vực</label>
+            <input type="number" id="MaKhuVuc" name="MaKhuVuc" value="{{branch.MaKhuVuc}}" required>
+        </div>
+
+        <!-- Mã Quản Lý -->
+        <div class="form-group">
+            <label for="NVQuanLy">Mã Quản Lý</label>
+            <input type="text" id="NVQuanLy" name="NVQuanLy" value="{{branch.NVQuanLy}}" required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit" class="btn-submit">Cập Nhật</button>
+        </div>
+    </form>
+
+
+
+
+</div> --}}
+
+
+{{!-- ------------------------------------------------------------------------------------}}
+{{!-- ------------------------------------------------------------------------------------}}
+
+<div class="flex">
+    <!-- Sidebar -->
+    {{> admin_partials/sidebar}}
+
+    <main class="flex-1 p-8 bg-gray-100">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center">{{title}}</h1>
+
+            <!-- Form Sửa Chi Nhánh -->
+            <form method="POST" action="/admin/branches/edit/{{branch.MaCN}}" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="TenCN" class="block text-gray-700 font-semibold mb-2">Branch Name:</label>
+                        <input type="text" name="TenCN" id="TenCN" value="{{branch.TenCN}}" required
+                            class="w-full p-2 border rounded focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="DiaChi" class="block text-gray-700 font-semibold mb-2">Address:</label>
+                        <input type="text" name="DiaChi" id="DiaChi" value="{{branch.DiaChi}}" required
+                            class="w-full p-2 border rounded focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="GioMo" class="block text-gray-700 font-semibold mb-2">Open Time:</label>
+                        <input type="time" name="GioMo" id="GioMo" value="{{branch.GioMo}}" required
+                            class="w-full p-2 border rounded focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="GioDong" class="block text-gray-700 font-semibold mb-2">Close Time:</label>
+                        <input type="time" name="GioDong" id="GioDong" value="{{branch.GioDong}}" required
+                            class="w-full p-2 border rounded focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="SDT" class="block text-gray-700 font-semibold mb-2">Phone:</label>
+                        <input type="text" name="SDT" id="SDT" value="{{branch.SDT}}" required
+                            class="w-full p-2 border rounded focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="MaKhuVuc" class="block text-gray-700 font-semibold mb-2">Region:</label>
+                        <select name="MaKhuVuc" id="MaKhuVuc" class="w-full p-2 border rounded focus:ring-blue-500">
+                            {{#each regions}}
+                            <option value="{{this.MaKhuVuc}}" {{#ifCond this.MaKhuVuc
+                                ../branch.MaKhuVuc}}selected{{/ifCond}}>
+                                {{this.TenKhuVuc}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded shadow hover:bg-blue-700">
+                    ✔ Update Branch
+                </button>
+            </form>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,107 @@
+<style>
+    /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    
+
+    /* Main Content */
+    main {
+        flex: 1;
+        background-color: #f4f7f9;
+        border-left: 1px solid #ddd;
+    }
+
+    /* Page Title */
+    .page-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #34495e;
+        margin-bottom: 20px;
+    }
+
+    /* Edit Dish Form */
+    .edit-dish-form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .edit-dish-form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .edit-dish-form input {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    .edit-dish-form input:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+    .save-button {
+        padding: 12px 20px;
+        font-size: 16px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .save-button:hover {
+        background-color: #2980b9;
+    }
+
+    
+</style>
+
+<div class="flex">
+    <!-- Sidebar -->
+    {{> admin_partials/sidebar}}
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 bg-gray-100">
+        <h1 class="page-title">{{title}}</h1>
+
+        <!-- Edit Dish Form -->
+        <form action="/admin/menu/edit/{{dish.MaMon}}" method="post" class="edit-dish-form">
+            <label for="MaMon">Dish Code</label>
+            <input type="text" id="MaMon" name="MaMon" value="{{dish.MaMon}}" readonly>
+
+            <label for="TenMon">Name</label>
+            <input type="text" id="TenMon" name="TenMon" value="{{dish.TenMon}}" required>
+
+            <label for="Gia">Price</label>
+            <input type="number" id="Gia" name="Gia" value="{{dish.Gia}}" required>
+
+            <label for="Loai">Type</label>
+            <input type="text" id="Loai" name="Loai" value="{{dish.Loai}}" required>
+
+            <button type="submit" class="save-button">Save Changes</button>
+        </form>
+    </main>
+</div>
