@@ -110,6 +110,11 @@ module.exports = {
 
             const card = result.recordset[0];
 
+            if (card && card.NgayLap) {
+                const date = new Date(card.NgayLap);
+                card.NgayLap = date.toISOString().split('T')[0];
+            }
+
             res.render('AdminPage/editUser', {
                 title: 'Edit Card',
                 layout: 'Admin/AdminMain',
@@ -120,7 +125,6 @@ module.exports = {
             res.status(500).send('Error fetching card details');
         }
     },
-
 
     // sửa thông tin thẻ
     editCard: async (req, res) => {

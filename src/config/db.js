@@ -2,9 +2,9 @@ const mssql = require('mssql');
 // Thiết lập kết nối với MySQL
 const config = {
     server: "localhost",
-    user: "dat",
-    password: "1234@",
-    database: "SushiStore_management",
+    user: "sa",
+    password: "123",
+    database: "db_sushi3",
     driver: "mssql",
     options:{
         encrypt: false,
