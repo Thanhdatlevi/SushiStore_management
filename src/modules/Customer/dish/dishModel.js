@@ -32,7 +32,7 @@ const Dish = {
 		const query = `
 		select distinct ma.MaMon, ma.TenMon, ma.Gia
 		from mon_an ma
-		join mon_an_chi_nhanh macn on ma.MaMon = macn.MaMon and macn.MaCN = ${idBranch}
+		join mon_an_chi_nhanh macn on ma.MaMon = macn.MaMon and macn.MaCN = ${idBranch} and macn.GiaoHang = 1
 		`;
 		try {
             const pool = await poolPromise;
