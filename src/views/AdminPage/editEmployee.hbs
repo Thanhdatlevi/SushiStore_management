@@ -99,9 +99,10 @@
 
 <!-- Admin Dashboard - index.hbs -->
 <div class="flex">
+  <!-- Sidebar -->
   {{> AdminHeader}}
-  <div>
-    <h1>Edit Employee</h1>
+
+  <h1>Edit Employee</h1>
 
   <!-- Kiểm tra nếu có lỗi và hiển thị thông báo lỗi -->
   {{#if errorMessage}}
@@ -172,6 +173,4 @@
 
     <button type="submit">Save Changes</button>
   </form>
-  </div>
-
 </div>

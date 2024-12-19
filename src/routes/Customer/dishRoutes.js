@@ -6,5 +6,7 @@ router.get('/', dishController.getAllDish);
 
 router.get('/getDishbyBranch/:idBranch', dishController.getDishbyBranch);
 
+router.get('/getDishGHbyBranch/:idBranch', dishController.getDishGHbyBranch);
+
 router.get('/api', dishController.getAllFilterDish);
 module.exports = router;

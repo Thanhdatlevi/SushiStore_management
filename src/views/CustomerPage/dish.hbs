@@ -18,22 +18,9 @@
                     <div class="mt-4">
                         <select id="branch-select" name="branch" class="p-2 border border-gray-300 rounded-md text-gray-700">
                             <option value="" selected disabled>Chọn chi nhánh</option>
-                            <option value="1">Branch 1</option>
-                            <option value="2">Branch 2</option>
-                            <option value="3">Branch 3</option>
-                            <option value="4">Branch 4</option>
-                            <option value="5">Branch 5</option>
-                            <option value="6">Branch 6</option>
-                            <option value="7">Branch 7</option>
-                            <option value="8">Branch 8</option>
-                            <option value="9">Branch 9</option>
-                            <option value="10">Branch 10</option>
-                            <option value="11">Branch 11</option>
-                            <option value="12">Branch 12</option>
-                            <option value="13">Branch 13</option>
-                            <option value="14">Branch 14</option>
-                            <option value="15">Branch 15</option>
-                            <option value="16">Branch 16</option>
+                            {{#each allBranch}}
+                            <option value={{this.MaCN}}>{{this.TenCN}} - {{this.DiaChi}}</option>
+                            {{/each}}
                         </select>
                     </div>
                 </fieldset>

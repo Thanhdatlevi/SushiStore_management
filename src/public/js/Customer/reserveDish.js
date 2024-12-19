@@ -1,7 +1,7 @@
 // Hàm lấy danh sách món ăn từ API theo chi nhánh
 async function fetchDishesByBranch(branchId) {
     try {
-        const response = await fetch(`/Customer/dish/getDishbyBranch/${branchId}`);
+        const response = await fetch(`/Customer/dish/getDishGHbyBranch/${branchId}`);
         if (!response.ok) {
             throw new Error('Không thể lấy dữ liệu món ăn');
         }
@@ -72,7 +72,6 @@ function updateQuantity(index, change, priceSpans, dishSelects, quantitySpans) {
     const quantity = quantitySpans[index];
     const priceSpan = priceSpans[index];
     let currentQuantity = parseInt(quantity.innerText);
-
     currentQuantity += change;
     if (currentQuantity < 1) currentQuantity = 1;
     quantity.innerText = currentQuantity;

@@ -1,4 +1,5 @@
 const Dish = require('./dishModel');
+const Branch = require('../branch/branchModel');
 const dishController = {
     getAllFilterDish: async (req, res) => {
         try {
@@ -45,13 +46,24 @@ const dishController = {
     },
     getAllDish: async (req, res) => {
         try {
+            const allBranch = await Branch.getAllBranch();
             res.render('CustomerPage/dish', {
                 layout: 'Customer/CustomerMain',
                 location_name: 'List Dish',
                 loc_detail: `Here is a list of our top sushi dishes, carefully selected to bring you the most delicious and authentic flavors. From traditional sushi rolls to innovative creations, each dish is designed to satisfy the tastes of all sushi lovers. With the freshest ingredients and expert chefs, we are committed to delivering a memorable and mouthwatering dining experience. Let's dive into the world of sushi and explore the finest flavors that will leave you craving for more!`,
                 title: 'Dish Page',
+                allBranch: allBranch,
                 scripts: '<script src="/js/Customer/dish.js"></script>'
             });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
+    getDishGHbyBranch: async (req, res) => {
+        try {
+            const { idBranch } = req.params
+            const branchDish = await Dish.getDishGHbyBranch(idBranch);
+            res.json(branchDish);
         } catch (err) {
             res.status(500).json({ error: err.message });
         }

@@ -1,5 +1,4 @@
 <style>
-  /* CSS cho bảng */
   .employee-table {
     width: 100%;
     border-collapse: collapse;
@@ -21,7 +20,6 @@
     background-color: #f9f9f9;
   }
 
-  /* CSS cho nút Edit và Delete */
   .action-btn {
     padding: 5px 10px;
     margin: 2px;
@@ -64,7 +62,6 @@
     background-color: #006f8a;
   }
 
-  /* CSS cho bảng khi không có dữ liệu */
   .employee-table td {
     text-align: center;
   }
@@ -90,33 +87,25 @@
 
   .add-employee-btn-container {
     display: flex;
-    /* Dùng flexbox để căn giữa các phần tử */
     flex-direction: column;
-    /* Sắp xếp theo chiều dọc */
     align-items: center;
-    /* Căn giữa theo chiều ngang */
     justify-content: center;
-    /* Căn giữa theo chiều dọc */
     margin-top: 20px;
   }
 
   .add-employee-btn {
     padding: 12px 24px;
-    /* Điều chỉnh padding cho nút */
     background-color: #008CBA;
     color: white;
     text-decoration: none;
     border-radius: 8px;
     font-size: 18px;
     transition: background-color 0.3s ease;
-    /* Thêm hiệu ứng chuyển màu */
     display: inline-block;
-    /* Đảm bảo nút là inline block */
   }
 
   .add-employee-btn:hover {
     background-color: #006f8a;
-    /* Thay đổi màu khi hover */
   }
 
   .add-employee-btn-container label {
@@ -126,23 +115,18 @@
   }
 </style>
 
-{{!-- Css cho Filter by Branch --}}
-
 <style>
   .form-group {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Khoảng cách giữa các thành phần */
     margin-bottom: 20px;
-    /* Khoảng cách phía dưới toàn bộ filter */
   }
 
   .form-group label {
     font-size: 16px;
     font-weight: bold;
     margin-right: 10px;
-    /* Khoảng cách giữa label và dropdown */
   }
 
   .form-group select {
@@ -156,7 +140,6 @@
   .btn {
     padding: 5px 15px;
     background-color: #007bff;
-    /* Màu xanh của nút */
     color: white;
     border: none;
     border-radius: 5px;
@@ -166,172 +149,269 @@
 
   .btn:hover {
     background-color: #0056b3;
-    /* Màu khi hover */
+  }
+
+  .form-group {
+    margin-top: 20px;
+    margin-left: 20px;
   }
 </style>
 
-<form action="/admin/employees" method="GET">
-  <div class="form-group">
-    <label for="MaChiNhanh">Filter by Branch:</label>
-    <select id="MaChiNhanh" name="MaChiNhanh" class="form-control">
-      <option value="">Select Branch</option>
-      {{#each branches}}
-      <option value="{{this.MaCN}}" {{#if (eq this.MaCN ../MaChiNhanh)}}selected{{/if}}>
-        {{this.TenCN}}
-      </option>
-      {{/each}}
-    </select>
-    <button type="submit" class="btn">Filter</button>
-  </div>
-</form>
+
+<style>
+  <style>
+
+  /* Tổng quan */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  main {
+    flex: 1;
+    background-color: #f9fafc;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap;
+  }
+
+  .form-control {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .form-control:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
+  }
+
+  .btn {
+    background-color: #1976d2;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .btn:hover {
+    background-color: #135ba1;
+  }
+
+  .employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .employee-table th {
+    background-color: #1976d2;
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+  }
+
+  .employee-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    color: #555;
+  }
+
+  .employee-table tr:nth-child(even) {
+    background-color: #f4f6f9;
+  }
+
+  .employee-table tr:hover {
+    background-color: #eaf3ff;
+    cursor: pointer;
+  }
+
+  .action-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+  }
+
+  .edit-btn {
+    background-color: #28a745;
+  }
+
+  .edit-btn:hover {
+    background-color: #218838;
+  }
+
+  .delete-btn {
+    background-color: #dc3545;
+    border: none;
+    cursor: pointer;
+  }
+
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+
+  .add-employee-btn-container {
+    text-align: center;
+  }
+
+  .add-employee-btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .add-employee-btn:hover {
+    background-color: #218838;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .form-control {
+      width: 100%;
+    }
+
+    .employee-table th,
+    .employee-table td {
+      font-size: 12px;
+      padding: 8px;
+    }
+  }
+</style>
+
+</style>
 
 
 <!-- Admin Dashboard - index.hbs -->
 <div class="flex">
-{{> AdminHeader}}
-  <table border="1" cellpadding="10" cellspacing="0" class="employee-table">
-    <thead>
-      <tr>
-        <th>Employee Code</th>
-        <th>Full Name</th>
-        <th>Gender</th>
-        <th>Date of Birth</th>
-        <th>Address</th>
-        <th>Department</th>
-        <th>Branch</th>
-        <th>Luong</th>
-        <th>Actions</th>
-        <th colspan="2">
-          <div class="add-employee-btn-container">
-            <label for="addEmployee">Add Employee:</label>
-            <a href="/admin/employees/add" class="add-employee-btn">Add</a>
-          </div>
-        </th>
+  <!-- Sidebar -->
+  {{> AdminHeader}}
 
-        <th>
-          <div class="header">
-            <form action="/admin/employees/search" method="GET">
-              <div class="form-group">
-                <label for="searchTerm">Search Employee:</label>
-                <input type="text" id="searchTerm" name="searchTerm" class="form-control"
-                  placeholder="Enter Code and Name Of Employee" value="{{searchTerm}}">
-              </div>
-              <button type="submit" class="btn">Tìm kiếm</button>
+  <main class="flex-1 bg-gray-100">
+
+    <form action="/admin/employees" method="GET">
+      <div class="form-group">
+        <label for="MaChiNhanh">Filter by Branch:</label>
+        <select id="MaChiNhanh" name="MaChiNhanh" class="form-control">
+          <option value="">Select Branch</option>
+          {{#each branches}}
+          <option value="{{this.MaCN}}" {{#if (eq this.MaCN ../MaChiNhanh)}}selected{{/if}}>
+            {{this.TenCN}}
+          </option>
+          {{/each}}
+        </select>
+        <button type="submit" class="btn">Filter</button>
+      </div>
+    </form>
+
+    <form action="/admin/employees/search" method="GET">
+      <div class="form-group">
+        <label for="searchTerm">Search Employee:</label>
+        <input type="text" id="searchTerm" name="searchTerm" class="form-control"
+          placeholder="Enter Code and Name Of Employee" value="{{searchTerm}}">
+        <button type="submit" class="btn">Tìm kiếm</button>
+      </div>
+      {{!-- <button type="submit" class="btn">Tìm kiếm</button> --}}
+    </form>
+
+    <table border="1" cellpadding="10" cellspacing="0" class="employee-table">
+      <thead>
+        <tr>
+          <th>Employee Code</th>
+          <th>Full Name</th>
+          <th>Gender</th>
+          <th>Date of Birth</th>
+          <th>Address</th>
+          <th>Department</th>
+          <th>Branch</th>
+          <th>Luong</th>
+          <th>Actions</th>
+          <th colspan="2">
+            <div class="add-employee-btn-container">
+              <label for="addEmployee">Add Employee:</label>
+              <a href="/admin/employees/add" class="add-employee-btn">Add</a>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each employees}}
+        <tr>
+          <td>{{this.MaNV}}</td>
+          <td>{{this.HoTen}}</td>
+          <td>{{this.Phai}}</td>
+          <td class="date-cell">{{this.NgaySinh}}</td>
+          {{!-- <td>{{this.NgaySinh}}</td> --}}
+          <td>{{this.SoNha}}, {{this.Duong}}, {{this.Quan}}, {{this.ThanhPho}}</td>
+          <td>{{this.BoPhan}}</td>
+          <td>{{this.ChiNhanh}}</td>
+          <td>{{this.Luong}}</td>
+          <td>
+            <a href="/admin/employees/edit/{{this.MaNV}}" class="action-btn edit-btn">Edit</a>
+            <form action="/admin/employees/delete/{{this.MaNV}}" method="post" style="display:inline;">
+              <button type="submit" class="action-btn delete-btn">Delete</button>
             </form>
-          </div>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each employees}}
-      <tr>
-        <td>{{this.MaNV}}</td>
-        <td>{{this.HoTen}}</td>
-        <td>{{this.Phai}}</td>
-        <td class="date-cell">{{this.NgaySinh}}</td>
-        {{!-- <td>{{this.NgaySinh}}</td> --}}
-        <td>{{this.SoNha}}, {{this.Duong}}, {{this.Quan}}, {{this.ThanhPho}}</td>
-        <td>{{this.BoPhan}}</td>
-        <td>{{this.ChiNhanh}}</td>
-        <td>{{this.Luong}}</td>
-        <td>
-          <a href="/admin/employees/edit/{{this.MaNV}}" class="action-btn edit-btn">Edit</a>
-          <form action="/admin/employees/delete/{{this.MaNV}}" method="post" style="display:inline;">
-            <button type="submit" class="action-btn delete-btn">Delete</button>
-          </form>
-        </td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
 
-  {{!-- <div class="add-employee-btn-container">
-    <a href="/admin/employees/add" class="add-employee-btn">Add New Employee</a>
-  </div> --}}
-
+  </main>
 </div>
-
-
-
-{{!--
-<!-- Hiển thị danh sách nhân viên -->
-<h3>Danh Sách Nhân Viên</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Mã NV</th>
-      <th>Họ Tên</th>
-      <th>Địa chỉ</th>
-      <th>Chi Nhánh</th>
-      <th>Bộ Phận</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each employees}}
-    <tr>
-      <td>{{MaNV}}</td>
-      <td>{{HoTen}}</td>
-      <td>{{SoNha}}, {{Duong}}, {{Quan}}, {{ThanhPho}}</td>
-      <td>{{ChiNhanh}}</td>
-      <td>{{BoPhan}}</td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table> --}}
-
-<style>
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  .form-group input {
-    width: 150px;
-    margin-top: 15px;
-    padding: 8px;
-    /* Thêm padding cho input */
-    font-size: 14px;
-    /* Đảm bảo kích thước chữ hợp lý */
-    color: black;
-    /* Màu chữ đen để dễ đọc */
-    border: 1px solid #ccc;
-    /* Thêm border cho input */
-    border-radius: 4px;
-    /* Góc bo tròn cho input */
-  }
-
-  .form-group input::placeholder {
-    color: #999;
-    /* Màu placeholder xám nhạt */
-  }
-
-  .btn {
-    padding: 8px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    /* Góc bo tròn cho nút */
-  }
-
-  .btn:hover {
-    background-color: #0056b3;
-  }
-</style>
-
-
-
 
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const dateCells = document.querySelectorAll('.date-cell'); // Lấy tất cả các ô có class là 'date-cell'
+    const dateCells = document.querySelectorAll('.date-cell'); // lấy tất cả các ô có class là 'date-cell'
 
     dateCells.forEach(cell => {
       const dateText = cell.textContent;
-      const date = new Date(dateText); // Chuyển chuỗi thành đối tượng Date
-      const formattedDate = date.toISOString().split('T')[0]; // Chỉ lấy phần ngày trong định dạng yyyy-MM-dd
-      cell.textContent = formattedDate; // Cập nhật nội dung của ô
+      const date = new Date(dateText);
+      const formattedDate = date.toISOString().split('T')[0];
+      cell.textContent = formattedDate;
     });
   });
 </script>
