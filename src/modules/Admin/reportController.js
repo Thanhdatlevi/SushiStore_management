@@ -227,7 +227,7 @@ module.exports.getSlowestDishByBranch = async (req, res) => {
 
         query += `
             GROUP BY ma.TenMon, pd.MaCN
-            HAVING SUM(mmpd.SoLuong) >= ALL (
+            HAVING SUM(mmpd.SoLuong) <= ALL (
                 SELECT SUM(mmpd2.SoLuong)
                 FROM phieu_dat pd2
                 JOIN ma_mon_phieu_dat mmpd2 ON pd2.MaPhieu = mmpd2.MaPhieu
@@ -287,14 +287,17 @@ module.exports.getSlowestDishByRegion = async (req, res) => {
             GROUP BY 
                 ma.TenMon, kv.TenKhuVuc, kv.MaKhuVuc
             HAVING 
-                SUM(mmpd.SoLuong) >= ALL (
-                    SELECT SUM(mmpd2.SoLuong)
-                    FROM phieu_dat pd2
-                    JOIN ma_mon_phieu_dat mmpd2 ON pd2.MaPhieu = mmpd2.MaPhieu
-                    JOIN chi_nhanh cn2 ON pd2.MaCN = cn2.MaCN
-                    JOIN khu_vuc kv2 ON cn2.MaKhuVuc = kv2.MaKhuVuc
-                    WHERE kv2.MaKhuVuc = kv.MaKhuVuc
-                    GROUP BY mmpd2.MaMon
+                SUM(mmpd.SoLuong) = (
+                    SELECT MIN(total)
+                    FROM (
+                        SELECT SUM(mmpd2.SoLuong) AS total
+                        FROM phieu_dat pd2
+                        JOIN ma_mon_phieu_dat mmpd2 ON pd2.MaPhieu = mmpd2.MaPhieu
+                        JOIN chi_nhanh cn2 ON pd2.MaCN = cn2.MaCN
+                        JOIN khu_vuc kv2 ON cn2.MaKhuVuc = kv2.MaKhuVuc
+                        WHERE kv2.MaKhuVuc = kv.MaKhuVuc
+                        GROUP BY mmpd2.MaMon
+                    ) AS totals
                 )
         `;
 
@@ -362,7 +365,7 @@ module.exports.getSlowestDishByBranchAndDate = async (req, res) => {
             GROUP BY 
                 ma.TenMon, pd.MaCN
             HAVING 
-                SUM(mmpd.SoLuong) >= ALL (
+                SUM(mmpd.SoLuong) <= ALL (
                     SELECT SUM(mmpd2.SoLuong)
                     FROM phieu_dat pd2
                     JOIN ma_mon_phieu_dat mmpd2 ON pd2.MaPhieu = mmpd2.MaPhieu

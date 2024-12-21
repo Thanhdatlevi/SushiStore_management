@@ -4,7 +4,8 @@ const config = {
     server: "localhost",
     user: "sa",
     password: "123",
-    database: "db_sushi3",
+    // database: "db_sushi3",
+    database: "db_sushi4",
     driver: "mssql",
     options:{
         encrypt: false,
