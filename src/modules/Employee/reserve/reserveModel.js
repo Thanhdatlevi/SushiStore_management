@@ -5,8 +5,9 @@ const Reserve = {
 
 		const query = `
 		SELECT 
-            'MP' + RIGHT('000' + CAST(MAX(CAST(SUBSTRING(MaPhieu, 3, LEN(MaPhieu)) AS INT)) + 1 AS VARCHAR), 3) AS next_MaPhieu
-            FROM phieu_dat;
+			RIGHT('000000' + CAST(CAST(pd.MaPhieu AS INT) + 1 AS VARCHAR), 6) AS next_MaPhieu
+		FROM phieu_dat pd
+		WHERE pd.MaPhieu = (SELECT MAX(pd1.MaPhieu) FROM phieu_dat pd1);
 		`;
 		try {
             const pool = await poolPromise;
