@@ -1,5 +1,4 @@
 const mssql = require('mssql');
-// Thiết lập kết nối với MySQL
 const config = {
     server: "localhost",
     user: "sa",

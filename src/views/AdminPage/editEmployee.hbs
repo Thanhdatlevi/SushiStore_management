@@ -65,7 +65,6 @@
 
   form br {
     display: none;
-    /* Removes extra line breaks */
   }
 
   .error-message {
@@ -76,35 +75,24 @@
 
   select {
     width: 100%;
-    /* Chiều rộng 100% của phần tử cha */
     padding: 12px 40px;
-    /* Tăng padding để phần tử rộng hơn */
     font-size: 1.2em;
-    /* Tăng kích thước chữ để dễ nhìn */
     border-radius: 5px;
-    /* Tạo viền bo tròn cho đẹp mắt */
     border: 1px solid #ddd;
-    /* Tạo đường viền nhẹ */
     box-sizing: border-box;
-    /* Đảm bảo padding và border không ảnh hưởng đến chiều rộng */
   }
 
   label {
     font-size: 1.1em;
-    /* Tăng kích thước font cho label */
     margin-bottom: 10px;
-    /* Thêm khoảng cách dưới label */
   }
 </style>
 
-<!-- Admin Dashboard - index.hbs -->
 <div class="flex">
-  <!-- Sidebar -->
   {{> AdminHeader}}
 
   <h1>Edit Employee</h1>
 
-  <!-- Kiểm tra nếu có lỗi và hiển thị thông báo lỗi -->
   {{#if errorMessage}}
   <div class="error-message">{{errorMessage}}</div>
   {{/if}}
