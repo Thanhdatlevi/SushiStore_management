@@ -54,9 +54,9 @@ async function fetchStatistics() {
 
         // Thêm thống kê món ăn
         statsContainer.innerHTML += `
-            <div class="p-4 rounded shadow mb-4">
+            <div class="p-4 rounded shadow mb-4 col-span-2">
                 <h2 class="text-lg font-bold mb-2">Số lượng Món Ăn</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 ">
                 ${stats.SoLuongMon.map(row => `
                     <div class="mb-4">
                             <p>Món ăn: ${row.MonAn}</p>

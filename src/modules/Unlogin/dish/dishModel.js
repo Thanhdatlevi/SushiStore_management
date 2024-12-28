@@ -19,9 +19,9 @@ const Dish = {
             const test = result.recordset
 
 			const totalDishs = test.length;
-			const totalPages = Math.ceil(totalDishs / 6);
-			const startIndex = (page - 1) * 6;
-			const paginatedDishs = test.slice(startIndex, startIndex + 6);
+			const totalPages = Math.ceil(totalDishs / 14);
+			const startIndex = (page - 1) * 18;
+			const paginatedDishs = test.slice(startIndex, startIndex + 14);
 			return { paginatedDishs, totalPages }
 		} catch (err) {
 			throw new Error('Error fetching tours by location: ' + err.message);

@@ -174,8 +174,9 @@ const Reserve = {
 				FROM nhan_vien nv
 				WHERE nv.MaNV = '${employeeID}'
 			)
-			AND YEAR(pd.NgayDat) = YEAR(GETDATE());
+			AND MONTH(pd.NgayDat) = MONTH(GETDATE());
         `;
+		console.log(doanhThuQuery)
         const doanhThu = await pool.request().query(doanhThuQuery);
 		try {
 			return {

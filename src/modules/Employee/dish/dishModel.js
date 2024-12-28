@@ -18,9 +18,9 @@ const Dish = {
             const test = result.recordset
 
 			const totalTours = test.length;
-			const totalPages = Math.ceil(totalTours / 6);
-			const startIndex = (page - 1) * 6;
-			const paginatedTours = test.slice(startIndex, startIndex + 6);
+			const totalPages = Math.ceil(totalTours / 14);
+			const startIndex = (page - 1) * 14;
+			const paginatedTours = test.slice(startIndex, startIndex + 14);
 			return { paginatedTours, totalPages }
 		} catch (err) {
 			throw new Error('Error get all dish in branch ' + err.message);

@@ -176,7 +176,9 @@ document.getElementById('submitButton').addEventListener('click', async () => {
         });
 
         if (response.ok) {
+            alert('Order successfully!');
             console.log('Order submitted successfully!');
+            location.reload();
             // Xử lý phản hồi từ server nếu cần
         } else {
             console.error('Error submitting order');

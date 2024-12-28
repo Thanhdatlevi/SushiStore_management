@@ -51,7 +51,7 @@ const Reserve = {
 			join the t on t.MaThe = '${userID}' and t.CCCD=kh.CCCD), 2);
 
 		INSERT INTO dat_ban_online (MaPhieu, KhuVuc, SoLuongKhach, GioDen, GhiChu)
-        VALUES ('${MaxMPs}', ${khuvucId}, ${guestCount},'${time}', '${note}');
+        VALUES ('${MaxMPs}', ${khuvucId}, ${guestCount},'${time}', N'${note}');
 		`;
 
 		const sqlMMPD = orderDetails.map(element => `
