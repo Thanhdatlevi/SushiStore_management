@@ -171,8 +171,12 @@
         font-weight: bold;
     }
 
-    .menu-table th:last-child{
+    .menu-table th:last-child {
         text-align: center;
+    }
+
+    .actions a {
+        transition: background-color 0.3s ease-in-out, transform 0.2s ease;
     }
 </style>
 
@@ -182,11 +186,25 @@
         <div class="menu-header flex justify-between items-center mb-6">
             <h1 class="page-title text-2xl font-bold text-gray-800">
                 <a href="/admin/menu">{{title}}</a>
-                </h1>
-            <a href="/admin/menu/add"
-                class="btn-add-dish bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">
-                ➕ Add New Dish
-            </a>
+            </h1>
+            <form action="">
+
+            </form>
+            <div class="actions flex gap-4">
+                <a href="/admin/menu/add"
+                    class="btn-add-dish bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">
+                    ➕ Add New Dish
+                </a>
+                <a href="/admin/menu/add/branches"
+                    class="btn-add-dish bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">
+                    ➕ Add New Dish To Branches
+                </a>
+                <a href="/admin/menu/add/region"
+                    class="btn-add-dish bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">
+                    ➕ Add New Dish To Region
+                </a>
+            </div>
+
             {{!-- search mon an --}}
             <div class="search-section bg-white p-4 rounded shadow mb-6">
                 <form action="/admin/menu/search" method="GET" class="search-form flex gap-4 items-center">
@@ -263,12 +281,33 @@
                                 class="btn-edit bg-blue-500 text-white px-3 py-1 rounded shadow hover:bg-blue-600">
                                 ✏️ Edit
                             </a>
+                            {{!-- <form action="/admin/menu/delete/{{this.MaMon}}" method="POST"
+                                style="display:inline;">
+                                <button type="submit"
+                                    class="btn-delete bg-red-500 text-white px-3 py-1 rounded shadow hover:bg-red-600">
+                                    🗑️ Delete
+                                </button>
+                            </form> --}}
+
                             <form action="/admin/menu/delete/{{this.MaMon}}" method="POST" style="display:inline;">
+                                <!-- Truyền regionId nếu có -->
+                                {{#if ../regionId}}
+                                <input type="hidden" name="regionId" value="{{../regionId}}">
+                                {{/if}}
+
+                                <!-- Truyền branchId nếu có -->
+                                {{#if ../branchId}}
+                                <input type="hidden" name="branchId" value="{{../branchId}}">
+                                {{/if}}
+
                                 <button type="submit"
                                     class="btn-delete bg-red-500 text-white px-3 py-1 rounded shadow hover:bg-red-600">
                                     🗑️ Delete
                                 </button>
                             </form>
+
+
+
                         </td>
                     </tr>
                     {{/each}}

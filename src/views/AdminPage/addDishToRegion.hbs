@@ -1,0 +1,114 @@
+<style>
+    /* Tiêu đề trang */
+    .page-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        background-color: #0b5285;
+        border-radius: 5px;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f4f6;
+        color: #4a4a4a;
+    }
+
+    .add-dish-form {
+        background-color: #ffffff;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .add-dish-form h2 {
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #374151;
+    }
+
+    .add-dish-form .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .add-dish-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #6b7280;
+    }
+
+    .add-dish-form input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+    }
+
+    .add-dish-form input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        outline: none;
+    }
+
+    .add-dish-form button {
+        background-color: #2563eb;
+        color: #ffffff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+        cursor: pointer;
+        border: none;
+    }
+
+    .add-dish-form button:hover {
+        background-color: #1d4ed8;
+    }
+
+    .add-dish-form button:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+    }
+</style>
+<div class="flex">
+    {{> AdminHeader}}
+    <main class="flex-1 p-8 bg-gray-100">
+        <header>
+            <h1 class="page-title text-2xl font-bold text-gray-800 mb-6">
+                <a href="/admin/menu">{{title}}</a>
+            </h1>
+        </header>
+
+        <!-- Add Dish Form -->
+        <div class="add-dish-to-region-form bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Add Dish to Region</h2>
+            <form action="/admin/menu/add/region" method="post" class="space-y-4">
+                <div class="form-group">
+                    <label for="MaKV" class="block text-gray-600 font-medium mb-1">Region ID</label>
+                    <input type="number" name="MaKV" id="MaKV"
+                        class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="MaMon" class="block text-gray-600 font-medium mb-1">Dish Code</label>
+                    <input type="text" name="MaMon" id="MaMon"
+                        class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        required>
+                </div>
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    ➕ Add Dish to Region
+                </button>
+            </form>
+        </div>
+
+
+    </main>
+</div>

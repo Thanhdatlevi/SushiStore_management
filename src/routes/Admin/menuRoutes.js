@@ -9,14 +9,22 @@ route.get('/filter', menuController.getMenuPage);
 route.get('/add', menuController.renderAddDishForm);
 route.post('/add', menuController.addDish);
 
-// Route sửa món ăn
+// thêm món ăn chi nhánh
+route.get('/add/branches', menuController.renderAddDishToBranchesForm);
+route.post('/add/branches', menuController.addDishToBranch);
+
+// thêm món ăn khu vuẹc
+route.get('/add/region', menuController.renderAddDishToRegionForm);
+route.post('/add/region', menuController.addDishToRegion);
+
+// sửa món ăn
 route.get('/edit/:id', menuController.renderEditDishForm);
 route.post('/edit/:id', menuController.editDish);
 
-// Route xoá món ăn
+// xoá món ăn
 route.post('/delete/:id', menuController.deleteDish);
 
-// Route tìm kiếm món ăn
+// tìm kiếm món ăn
 route.get('/search', menuController.searchDish);
 
 module.exports = route;
