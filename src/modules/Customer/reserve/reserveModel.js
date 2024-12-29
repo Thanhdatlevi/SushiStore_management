@@ -59,6 +59,7 @@ const Reserve = {
 			VALUES ('${MaxMPs}', '${element.MaMon}', ${element.SoLuong}, 1);
 		`).join('\n');
 		const query = sqlOrder + '\n' + sqlMMPD;
+		console.log(query)
 		try {
             const pool = await poolPromise;
 			await pool.request().query(query);
@@ -97,16 +98,16 @@ const Reserve = {
 	},
 	getReserveTableByUserID: async (userID) => {
 		const query = `
-		select pd.MaPhieu, pd.NgayDat, pd.MaCN, cn.TenCN,dbol.KhuVuc, dbol.GioDen, dbol.SoLuongKhach,dbol.GhiChu,(
-				SELECT 
-					mmpd.MaMon,
-					ma.TenMon,
-					mmpd.SoLuong
-				FROM ma_mon_phieu_dat mmpd
-				join mon_an ma on ma.MaMon=mmpd.MaMon
-				WHERE mmpd.MaPhieu=pd.MaPhieu
-				FOR JSON PATH
-			) AS DanhSachMonAn
+		select pd.MaPhieu, pd.NgayDat, pd.MaCN, cn.TenCN,dbol.KhuVuc, dbol.GioDen, dbol.SoLuongKhach,dbol.GhiChu,ISNULL((
+			SELECT 
+				mmpd.MaMon,
+				ma.TenMon,
+				mmpd.SoLuong
+			FROM ma_mon_phieu_dat mmpd
+			JOIN mon_an ma ON ma.MaMon = mmpd.MaMon
+			WHERE mmpd.MaPhieu = pd.MaPhieu
+			FOR JSON PATH
+		), '[]') AS DanhSachMonAn
 		from phieu_dat pd
 		join dat_ban_online dbol on dbol.MaPhieu = pd.MaPhieu
 		join chi_nhanh cn on cn.MaCN = pd.MaCN
